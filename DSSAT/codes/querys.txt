@@ -1,0 +1,16 @@
+create table output_2 as 
+select ppg.DATE, ppg.value PONTO_SIMULACAO, ppg.CWAD CWAD_ORIGINAL, ppg2.CWAD CWAD_LAG, 
+ppg.HERB-(ppg2.CWAD-ppg.CWAD) GANHO_DIARIO_CWAD, STRFTIME('%d', ppg.DATE) as 'day', STRFTIME('%m', ppg.DATE) as 'month', STRFTIME('%Y', ppg.DATE) as 'year'
+from PlantGro_2 ppg , PlantGro_2 ppg2 
+where ppg.rowid = ppg2.rowid+1
+
+create table output_mensal_2 as
+select month, year, PONTO_SIMULACAO, SUM(GANHO_DIARIO_CWAD), FIRST_VALUE(CWAD_ORIGINAL) OVER(partition by PONTO_SIMULACAO)
+from output_2
+group by year, month, PONTO_SIMULACAO 
+
+
+create table output_diario_2 as
+select day, month, PONTO_SIMULACAO, AVG(GANHO_DIARIO_CWAD)
+from output_2
+group by day, month, PONTO_SIMULACAO 

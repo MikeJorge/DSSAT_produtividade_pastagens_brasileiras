@@ -1,0 +1,35 @@
+*WARNING DETAIL FILE
+
+******************************************************************************
+
+*DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
+
+*RUN   1        : MARANDU11299              PRFRM048 SPPI7902    1
+ MODEL          : PRFRM048 - Brachiaria
+ EXPERIMENT     : SPPI7902 BR
+ DATA PATH      : C:/DSSAT48/Brachiaria/
+ TREATMENT  1   : MARANDU11299              PRFRM048
+  
+
+ SOILDYN  YEAR DOY = 1980   2
+ Organic C data in one or more soil layers are zero or missing.                
+ A minimum value of OC in this layer  will be estimated using soil texture.    
+       Depth  Clay  Silt    OC                                                 
+ Layer  (cm)   (%)   (%)   (%)                                                 
+     1     5  24.8  30.8  0.90 (estimated)                                     
+     2    15  28.0  31.9  0.97 (estimated)                                     
+     3    30  31.1  33.0  1.03 (estimated)                                     
+     4    45  34.0  34.7  1.10 (estimated)                                     
+     5    60  34.0  34.7  1.10 (estimated)                                     
+     6    80  32.4  34.7  1.08 (estimated)                                     
+     7   100  32.4  34.7  1.08 (estimated)                                     
+     8   150  30.9  34.3  1.05 (estimated)                                     
+     9   200  30.9  34.3  1.05 (estimated)                                     
+
+ NCHECK  YEAR DOY = 1984 205
+ The carbon/nutrient ratio (C/N or C/P) of the residue                         
+ or senesced biomass that was added to the soil                                
+ is outside the common range to which the CESTR                                
+ parameter in the file SOMFX048.SDA applies. You have a                        
+ residue with an extremely low nutrient concentration.                         
+ Please check your data and/or adapt the CESTR value.                          

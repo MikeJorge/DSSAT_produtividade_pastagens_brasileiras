@@ -1,0 +1,32 @@
+*WATER BALANCE OUTPUT FILE
+
+*DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
+
+*RUN   1        : MARANDU11299              PRFRM048 SPPI7902    1
+ MODEL          : PRFRM048 - Brachiaria
+ EXPERIMENT     : SPPI7902 BR
+ DATA PATH      : C:/DSSAT48/Brachiaria/
+ TREATMENT  1   : MARANDU11299              PRFRM048
+  
+
+!     WATER BALANCE PARAMETERS
+!     ========================                 --mm--
+
+!     Soil H20 (start) on Year/day 1980/002    633.95
+!     Soil H20 (final) on Year/day 2016/365    641.60
+!     Effective Irrigation                      10.50
+!     Precipitation                          48662.45
+!     Water added with new mulch                 0.00
+!     Drainage                               19133.29
+!     Tiledrain flow                             0.00
+!     Runoff                                  5435.51
+!     Mulch evaporation                        978.58
+!     Soil Evaporation                       15179.11
+!     Transpiration                           7938.29
+!     Potential ET                           35822.66
+
+!     Initial mulch water content                0.00
+!     Final mulch water content                  0.00
+
+!     Final Balance                             0.515
+
