@@ -16,25 +16,30 @@ path <- "D:/arquivos/doutorado_michael/DSSAT-BPPP/outputs/outptus_michael.db" #e
 conn <- dbConnect(SQLite(), path)
 dbListTables(conn)
 
+# Fazendo o upload no banco da tabela de depreciacao da produtividade por plantas daninhas
+setwd("D:/arquivos/GPP/git_workspace/") #endereco da pasta onde o repositorio foi clonado
+tabela_pd <- fread("DSSAT_produtividade_pastagens_brasileiras/DSSAT/data/depreciacao_plantas_daninhas.csv")
+dbWriteTable(conn, "depreciacao_plantas_daninhas", tabela_pd, overwrite = TRUE)
+
 # Querys para agrupar os dados na escala mensal e diario
 
 output_cen1 <- "CREATE TABLE output_1 AS
                 SELECT ppg.DATE, ppg.value PONTO_SIMULACAO, ppg.CWAD CWAD_ORIGINAL, ppg2.CWAD CWAD_LAG, 
-                  ppg.HERB-(ppg2.CWAD-ppg.CWAD) GANHO_DIARIO_CWAD, STRFTIME('%d', ppg.DATE) as 'day', 
+                  (ppg.HERB-(ppg2.CWAD-ppg.CWAD))*0.98 GANHO_DIARIO_CWAD, STRFTIME('%d', ppg.DATE) as 'day', 
                   STRFTIME('%m', ppg.DATE) as 'month', STRFTIME('%Y', ppg.DATE) as 'year'
                 FROM PlantGro_cen1 ppg , PlantGro_cen1 ppg2 
                 WHERE ppg.rowid = ppg2.rowid+1"
 
 output_cen2 <- "CREATE TABLE output_2 AS
                 SELECT ppg.DATE, ppg.value PONTO_SIMULACAO, ppg.CWAD CWAD_ORIGINAL, ppg2.CWAD CWAD_LAG, 
-                  ppg.HERB-(ppg2.CWAD-ppg.CWAD) GANHO_DIARIO_CWAD, STRFTIME('%d', ppg.DATE) as 'day', 
+                  (ppg.HERB-(ppg2.CWAD-ppg.CWAD))*0.985 GANHO_DIARIO_CWAD, STRFTIME('%d', ppg.DATE) as 'day', 
                   STRFTIME('%m', ppg.DATE) as 'month', STRFTIME('%Y', ppg.DATE) as 'year'
                 FROM PlantGro_cen2 ppg , PlantGro_cen2 ppg2 
                 WHERE ppg.rowid = ppg2.rowid+1"
 
 output_cen3 <- "CREATE TABLE output_3 AS
                 SELECT ppg.DATE, ppg.value PONTO_SIMULACAO, ppg.CWAD CWAD_ORIGINAL, ppg2.CWAD CWAD_LAG, 
-                  ppg.HERB-(ppg2.CWAD-ppg.CWAD) GANHO_DIARIO_CWAD, STRFTIME('%d', ppg.DATE) as 'day', 
+                  (ppg.HERB-(ppg2.CWAD-ppg.CWAD))*0.99 GANHO_DIARIO_CWAD, STRFTIME('%d', ppg.DATE) as 'day', 
                   STRFTIME('%m', ppg.DATE) as 'month', STRFTIME('%Y', ppg.DATE) as 'year'
                 FROM PlantGro_cen3 ppg , PlantGro_cen3 ppg2 
                 WHERE ppg.rowid = ppg2.rowid+1"
@@ -47,11 +52,12 @@ output_pot <- "CREATE TABLE output_pot AS
                 WHERE ppg.rowid = ppg2.rowid+1"
 
 output_ext <- "CREATE TABLE output_ext AS
-                SELECT ppg.DATE, ppg.value PONTO_SIMULACAO, ppg.CWAD CWAD_ORIGINAL, ppg2.CWAD CWAD_LAG, 
-                  ppg.HERB-(ppg2.CWAD-ppg.CWAD) GANHO_DIARIO_CWAD, STRFTIME('%d', ppg.DATE) as 'day', 
+                SELECT ppg.DATE, ppg.value PONTO_SIMULACAO, ppg.CWAD CWAD_ORIGINAL, ppg2.CWAD CWAD_LAG,
+                ppg.HERB-(ppg2.CWAD-ppg.CWAD)  GANHO_DIARIO_CWAD,
+                  (ppg.HERB-(ppg2.CWAD-ppg.CWAD))*pd.ext GANHO_DIARIO_CWAD_penalizado, STRFTIME('%d', ppg.DATE) as 'day', 
                   STRFTIME('%m', ppg.DATE) as 'month', STRFTIME('%Y', ppg.DATE) as 'year'
-                FROM PlantGro_ext ppg , PlantGro_ext ppg2 
-                WHERE ppg.rowid = ppg2.rowid+1"
+                FROM PlantGro_ext ppg , PlantGro_ext ppg2, depreciacao_plantas_daninhas pd 
+                WHERE ppg.rowid = ppg2.rowid+1 AND STRFTIME('%Y', ppg.DATE) = pd.year"
 
 
 mensal_cen1 <- "CREATE TABLE mensal_1 AS
