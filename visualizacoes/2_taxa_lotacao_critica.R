@@ -142,6 +142,10 @@ for (i in cenarios) {
   tl_critica <- merge(tl_critica, sem_deficit, by = "ponto_simulacao", all.x = TRUE)
 }
 
+# Exportando a tabela final
+write.table(tl_critica, "D:/arquivos/doutorado_michael/tabelas/taxa_lotacao_critica_cenarios.csv",
+            row.names = F, sep = ";")
+
 
 
 
