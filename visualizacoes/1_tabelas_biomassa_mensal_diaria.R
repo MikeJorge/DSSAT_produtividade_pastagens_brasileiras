@@ -60,55 +60,82 @@ output_ext <- "CREATE TABLE output_ext AS
 
 
 mensal_cen1 <- "CREATE TABLE mensal_1 AS
-                SELECT month, year, PONTO_SIMULACAO, SUM(GANHO_DIARIO_CWAD), FIRST_VALUE(CWAD_ORIGINAL) OVER(partition by PONTO_SIMULACAO)
+                SELECT month, year, PONTO_SIMULACAO, SUM(GANHO_DIARIO_CWAD) biomassa_mensal, FIRST_VALUE(CWAD_ORIGINAL) OVER(partition by PONTO_SIMULACAO)
                 FROM output_1
                 GROUP BY year, month, PONTO_SIMULACAO"
 
 mensal_cen2 <- "CREATE TABLE mensal_2 AS
-                SELECT month, year, PONTO_SIMULACAO, SUM(GANHO_DIARIO_CWAD), FIRST_VALUE(CWAD_ORIGINAL) OVER(partition by PONTO_SIMULACAO)
+                SELECT month, year, PONTO_SIMULACAO, SUM(GANHO_DIARIO_CWAD) biomassa_mensal, FIRST_VALUE(CWAD_ORIGINAL) OVER(partition by PONTO_SIMULACAO)
                 FROM output_2
                 GROUP BY year, month, PONTO_SIMULACAO"
 
 mensal_cen3 <- "CREATE TABLE mensal_3 AS
-                SELECT month, year, PONTO_SIMULACAO, SUM(GANHO_DIARIO_CWAD), FIRST_VALUE(CWAD_ORIGINAL) OVER(partition by PONTO_SIMULACAO)
+                SELECT month, year, PONTO_SIMULACAO, SUM(GANHO_DIARIO_CWAD) biomassa_mensal, FIRST_VALUE(CWAD_ORIGINAL) OVER(partition by PONTO_SIMULACAO)
                 FROM output_3
                 GROUP BY year, month, PONTO_SIMULACAO"
 
 mensal_pot <- "CREATE TABLE mensal_pot AS
-                SELECT month, year, PONTO_SIMULACAO, SUM(GANHO_DIARIO_CWAD), FIRST_VALUE(CWAD_ORIGINAL) OVER(partition by PONTO_SIMULACAO)
+                SELECT month, year, PONTO_SIMULACAO, SUM(GANHO_DIARIO_CWAD) biomassa_mensal, FIRST_VALUE(CWAD_ORIGINAL) OVER(partition by PONTO_SIMULACAO)
                 FROM output_pot
                 GROUP BY year, month, PONTO_SIMULACAO"
 
 mensal_ext <- "CREATE TABLE mensal_ext AS
-                SELECT month, year, PONTO_SIMULACAO, SUM(GANHO_DIARIO_CWAD), FIRST_VALUE(CWAD_ORIGINAL) OVER(partition by PONTO_SIMULACAO)
+                SELECT month, year, PONTO_SIMULACAO, SUM(GANHO_DIARIO_CWAD) biomassa_mensal, FIRST_VALUE(CWAD_ORIGINAL) OVER(partition by PONTO_SIMULACAO)
                 FROM output_ext
                 GROUP BY year, month, PONTO_SIMULACAO"
 
 
 diario_cen1 <- "CREATE TABLE diario_1 as
-                SELECT day, month, PONTO_SIMULACAO, AVG(GANHO_DIARIO_CWAD)
+                SELECT day, month, PONTO_SIMULACAO, AVG(GANHO_DIARIO_CWAD) biomassa_diaria
                 FROM output_1
                 GROUP BY day, month, PONTO_SIMULACAO"
 
 diario_cen2 <- "CREATE TABLE diario_2 as
-                SELECT day, month, PONTO_SIMULACAO, AVG(GANHO_DIARIO_CWAD)
+                SELECT day, month, PONTO_SIMULACAO, AVG(GANHO_DIARIO_CWAD) biomassa_diaria
                 FROM output_2
                 GROUP BY day, month, PONTO_SIMULACAO"
 
 diario_cen3 <- "CREATE TABLE diario_3 as
-                SELECT day, month, PONTO_SIMULACAO, AVG(GANHO_DIARIO_CWAD)
+                SELECT day, month, PONTO_SIMULACAO, AVG(GANHO_DIARIO_CWAD) biomassa_diaria
                 FROM output_3
                 GROUP BY day, month, PONTO_SIMULACAO"
 
 diario_pot <- "CREATE TABLE diario_pot as
-                SELECT day, month, PONTO_SIMULACAO, AVG(GANHO_DIARIO_CWAD)
+                SELECT day, month, PONTO_SIMULACAO, AVG(GANHO_DIARIO_CWAD) biomassa_diaria
                 FROM output_pot
                 GROUP BY day, month, PONTO_SIMULACAO"
 
 diario_ext <- "CREATE TABLE diario_ext as
-                SELECT day, month, PONTO_SIMULACAO, AVG(GANHO_DIARIO_CWAD)
+                SELECT day, month, PONTO_SIMULACAO, AVG(GANHO_DIARIO_CWAD) biomassa_diaria
                 FROM output_ext
                 GROUP BY day, month, PONTO_SIMULACAO"
+
+
+
+mensal_modelo_cen1 <- "CREATE TABLE mensal_modelo_1 AS
+                SELECT month, PONTO_SIMULACAO, AVG(biomassa_mensal) biomassa_mensal
+                FROM mensal_cen1
+                GROUP BY month, PONTO_SIMULACAO"
+
+mensal_modelo_cen2 <- "CREATE TABLE mensal_modelo_2 AS
+                SELECT month, PONTO_SIMULACAO, AVG(biomassa_mensal) biomassa_mensal
+                FROM mensal_cen2
+                GROUP BY  month, PONTO_SIMULACAO"
+
+mensal_modelo_cen3 <- "CREATE TABLE mensal_modelo_3 AS
+                SELECT month, PONTO_SIMULACAO, AVG(biomassa_mensal) biomassa_mensal
+                FROM mensal_cen3
+                GROUP BY month, PONTO_SIMULACAO"
+
+mensal_modelo_pot <- "CREATE TABLE mensal_modelo_pot AS
+                SELECT month, PONTO_SIMULACAO, AVG(biomassa_mensal) biomassa_mensal
+                FROM mensal_pot
+                GROUP BY month, PONTO_SIMULACAO"
+
+mensal_modelo_ext <- "CREATE TABLE mensal_modelo_ext AS
+                SELECT month, PONTO_SIMULACAO, AVG(biomassa_mensal) biomassa_mensal
+                FROM mensal_ext
+                GROUP BY month, PONTO_SIMULACAO"
 
 
 
@@ -143,6 +170,22 @@ dbSendQuery(conn, mensal_pot)
 
 dbSendQuery(conn, "DROP TABLE IF EXISTS mensal_ext") 
 dbSendQuery(conn, mensal_ext)
+
+
+dbSendQuery(conn, "DROP TABLE IF EXISTS mensal_modelo_1") 
+dbSendQuery(conn, mensal_modelo_cen1)
+
+dbSendQuery(conn, "DROP TABLE IF EXISTS mensal_modelo_2") 
+dbSendQuery(conn, mensal_modelo_cen2)
+
+dbSendQuery(conn, "DROP TABLE IF EXISTS mensal_modelo_3") 
+dbSendQuery(conn, mensal_modelo_cen3)
+
+dbSendQuery(conn, "DROP TABLE IF EXISTS mensal_modelo_pot") 
+dbSendQuery(conn, mensal_modelo_pot)
+
+dbSendQuery(conn, "DROP TABLE IF EXISTS mensal_modelo_ext") 
+dbSendQuery(conn, mensal_modelo_ext)
 
 
 dbSendQuery(conn, "DROP TABLE IF EXISTS diario_1") 
