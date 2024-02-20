@@ -114,17 +114,17 @@ diario_ext <- "CREATE TABLE diario_ext as
 
 mensal_modelo_cen1 <- "CREATE TABLE mensal_modelo_1 AS
                 SELECT month, PONTO_SIMULACAO, AVG(biomassa_mensal) biomassa_mensal
-                FROM mensal_cen1
+                FROM mensal_1
                 GROUP BY month, PONTO_SIMULACAO"
 
 mensal_modelo_cen2 <- "CREATE TABLE mensal_modelo_2 AS
                 SELECT month, PONTO_SIMULACAO, AVG(biomassa_mensal) biomassa_mensal
-                FROM mensal_cen2
+                FROM mensal_2
                 GROUP BY  month, PONTO_SIMULACAO"
 
 mensal_modelo_cen3 <- "CREATE TABLE mensal_modelo_3 AS
                 SELECT month, PONTO_SIMULACAO, AVG(biomassa_mensal) biomassa_mensal
-                FROM mensal_cen3
+                FROM mensal_3
                 GROUP BY month, PONTO_SIMULACAO"
 
 mensal_modelo_pot <- "CREATE TABLE mensal_modelo_pot AS
