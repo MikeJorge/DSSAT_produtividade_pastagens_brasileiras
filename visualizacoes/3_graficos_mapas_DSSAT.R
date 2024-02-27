@@ -18,9 +18,19 @@ dbListTables(conn)
 
 # Mapas com o grid de biomassa seca (mensal e anual)----
 # Ingerindo os dados
-grid <- st_read("D:/arquivos/GPP/pastagens_IABS/analises_finais/BR_grid.shp")
-pontosfiltro <- fread("D:/arquivos/GPP/pastagens_IABS/analises_finais/pontos_filtro_N400.csv")
+path <- "D:/arquivos/doutorado_michael/" #endereco da pasta DSSAT-BPPP
+grid <- st_read(paste(path, "DSSAT-BPPP/data/grid/BR_grid.shp", sep = ""))
+pontos_bioma <- fread(paste(path, "tabelas/ponto_bioma.csv", sep = ""))
 
+# Selecionando o bioma mais representativo de cada ponto
+pontos_bioma <- pontos_bioma %>%
+  group_by(ponto_simulacao) %>%
+  filter(area_ha == max(area_ha))
+
+# Separando os pontos nos biomas Amazônia, Mata Atlântica e Cerrado
+pontos_filtro <- filter(pontos_bioma, bioma %in% c("Amazônia", "Mata Atlântica", "Cerrado"))
+
+# Lendo as tabelas mensais do banco
 out_mensal_1 <- dbGetQuery(conn,'select * from mensal_1')
 out_mensal_2 <- dbGetQuery(conn,'select * from mensal_2')
 out_mensal_3 <- dbGetQuery(conn,'select * from mensal_3')
