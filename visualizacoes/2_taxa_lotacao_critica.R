@@ -23,7 +23,7 @@ last.year.per.point <- out %>%
   group_by(PONTO_SIMULACAO) %>% 
   summarise(ano = max(year))
 
-problems <- subset(last.year.per.point, ano < 2016) #nao houve pontos de morte, nem no cenario mais restritivo (extensivo)
+problems <- subset(last.year.per.point, ano < 2016)
 
 print(paste("Em", nrow(problems), "pontos de simulação a pastagem morreu antes de 2016", sep = " "))
 
