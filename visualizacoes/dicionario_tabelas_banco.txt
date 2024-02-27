@@ -1,0 +1,20 @@
+Dicionário - nome e conteúdo das tabelas do banco de dados.
+
+Todas as tabelas foram nomeadas da seguinte forma: nometabela_cenario
+
+Sendo os cenários definidos: 1 (baixa produtividade), 2 (média produtividade), 3 (alta produtividade), pot (potencial) e ext (extensivo)
+
+Nomes das tabelas:
+PlantGro: output original do DSSAT
+output: dado tratado, com o ganho diário de biomassa calculado
+mensal: acúmulo mensal de biomassa para cada mês/ano/ponto_simulação
+mensal_modelo: acúmulo mensal de biomassa para cada mês do ano modelo
+diario: acúmulo diário de biomassa para cada dia do ano modelo
+
+
+
+
+
+
+
+
