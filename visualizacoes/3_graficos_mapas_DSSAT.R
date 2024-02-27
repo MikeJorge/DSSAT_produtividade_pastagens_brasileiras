@@ -205,3 +205,62 @@ p1 <- ggplot(mensal_diario, aes(x = fct_rev(reorder(mes, -month)), y = ganho_dia
 dev.off()
 
 
+# Taxas mensais de produção de biomassa seca por bioma
+# Unindo a informacao de bioma nas bases
+colnames(pontos_bioma)[1] <- 'value'
+mensal_1 <- merge(mensal_1, pontos_bioma[,1:2], by = "value", all.x = T)
+mensal_2 <- merge(mensal_2, pontos_bioma[,1:2], by = "value", all.x = T)
+mensal_3 <- merge(mensal_3, pontos_bioma[,1:2], by = "value", all.x = T)
+mensal_pot <- merge(mensal_pot, pontos_bioma[,1:2], by = "value", all.x = T)
+mensal_ext <- merge(mensal_ext, pontos_bioma[,1:2], by = "value", all.x = T)
+
+# Agrupando por mes e por bioma
+mensal_1 <- mensal_1 %>% group_by(month, bioma)%>%summarise(biom_med = mean(biomassa_mensal, na.rm = T),
+                                                                biom_sd = sd(biomassa_mensal, na.rm = T))
+
+mensal_2 <- mensal_2 %>% group_by(month, bioma)%>%summarise(biom_med = mean(biomassa_mensal, na.rm = T),
+                                                            biom_sd = sd(biomassa_mensal, na.rm = T))
+
+mensal_3 <- mensal_3 %>% group_by(month, bioma)%>%summarise(biom_med = mean(biomassa_mensal, na.rm = T),
+                                                            biom_sd = sd(biomassa_mensal, na.rm = T))
+
+mensal_pot <- mensal_pot %>% group_by(month, bioma)%>%summarise(biom_med = mean(biomassa_mensal, na.rm = T),
+                                                            biom_sd = sd(biomassa_mensal, na.rm = T))
+
+mensal_ext <- mensal_ext %>% group_by(month, bioma)%>%summarise(biom_med = mean(biomassa_mensal, na.rm = T),
+                                                            biom_sd = sd(biomassa_mensal, na.rm = T))
+
+# Filtrando os biomas de interesse
+mensal_1 <- filter(mensal_1, bioma %in% c("Amazônia", "Cerrado", "Mata Atlântica"))
+mensal_2 <- filter(mensal_2, bioma %in% c("Amazônia", "Cerrado", "Mata Atlântica"))
+mensal_3 <- filter(mensal_3, bioma %in% c("Amazônia", "Cerrado", "Mata Atlântica"))
+mensal_pot <- filter(mensal_pot, bioma %in% c("Amazônia", "Cerrado", "Mata Atlântica"))
+mensal_ext <- filter(mensal_ext, bioma %in% c("Amazônia", "Cerrado", "Mata Atlântica"))
+
+# Definindo os cenarios e unindo as bases
+mensal_1$cenario <- "Baixa produtividade"
+mensal_2$cenario <- "Média produtividade"
+mensal_3$cenario <- "Alta produtividade"
+mensal_pot$cenario <- "Produtividade potencial"
+mensal_ext$cenario <- "Bovinocultura extensiva"
+
+mensal <- rbind(mensal_1, mensal_2, mensal_3, mensal_ext, mensal_pot)
+
+# Arrumando os labels mensais
+mensal$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"),each = 3, times= 5)
+mensal$month <- as.integer(mensal$month)
+
+# Grafico de taxa mensal por bioma
+
+png(paste(path, "graficos/taxa_acumulo_mensal.png", sep = ""), width = 3500, height = 2200, res = 500)
+p2 <- ggplot(mensal, aes(x = fct_rev(reorder(mes, -month)), y = biom_med, color = cenario))+
+  geom_line(aes(group = cenario))+
+  geom_point()+
+  #geom_errorbar(aes(ymin = mensal_diario$ganho_diario_med - mensal_diario$ganho_diario_sd, ymax = ganho_diario_med + ganho_diario_sd))+
+  facet_wrap(~bioma, ncol = 2)+
+  labs(x = "Mês",
+       y = "Taxa de acúmulo mensal de pastagem (kg MS/ha/mês)",
+       color = "Cenário")+
+  theme_bw(base_family = "Times New Roman")+
+  theme(text = element_text(size = 12)); p2
+dev.off()
