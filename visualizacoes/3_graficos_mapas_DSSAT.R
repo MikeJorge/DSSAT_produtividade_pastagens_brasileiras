@@ -42,7 +42,7 @@ mensal_ext <- dbGetQuery(conn,'select * from mensal_modelo_ext')
 head(mensal_1)
 anual_1 <- mensal_1 %>% group_by(PONTO_SIMULACAO)%>%summarise(biomassa_anual_1 = sum(biomassa_mensal, na.rm = T))
 anual_2 <- mensal_2 %>% group_by(PONTO_SIMULACAO)%>%summarise(biomassa_anual_2 = sum(biomassa_mensal, na.rm = T))
-anual_3 <- mensal_1 %>% group_by(PONTO_SIMULACAO)%>%summarise(biomassa_anual_3 = sum(biomassa_mensal, na.rm = T))
+anual_3 <- mensal_3 %>% group_by(PONTO_SIMULACAO)%>%summarise(biomassa_anual_3 = sum(biomassa_mensal, na.rm = T))
 anual_pot <- mensal_pot %>% group_by(PONTO_SIMULACAO)%>%summarise(biomassa_anual_pot = sum(biomassa_mensal, na.rm = T))
 anual_ext <- mensal_ext %>% group_by(PONTO_SIMULACAO)%>%summarise(biomassa_anual_ext = sum(biomassa_mensal, na.rm = T))
 
