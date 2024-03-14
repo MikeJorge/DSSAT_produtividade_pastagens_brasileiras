@@ -57,7 +57,7 @@ for (i in cenarios) {
   
   # Dt - Demanda diaria
   CD <- 8.8
-  EPP <- 0.5
+  EPP <- 0.5 #variar a EPP em funcao do periodo: aguas (out-abr, maio-set)
   PAP$Dt <- with(PAP, TL_sup*CD/EPP)
   
   # CFD (Cumulative Forage Deficit) e TL critica
