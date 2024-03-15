@@ -101,7 +101,7 @@ names <- c("value","bio_ext_01", "bio_ext_02", "bio_ext_03", "bio_ext_04", "bio_
 colnames(w_mensal_ext) <- names
 
 # Lendo e organizando a taxa de lotacao critica
-tl_critica <- fread(paste(path, "tabelas/taxa_lotacao_critica_cenarios.csv", sep = ""))
+tl_critica <- fread(paste(path, "tabelas/taxa_lotacao_critica_cenarios_epp_variavel.csv", sep = ""))
 colnames(tl_critica)[1] <- "value"
 
 # Juntando os resultados na tabela de atributos do shape
@@ -191,7 +191,7 @@ mensal_diario$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago
 mensal_diario$month <- as.integer(mensal_diario$month)
 
 # Grafico de taxa diaria
-png(paste(path, "graficos/taxa_acumulo_diario.png", sep = ""), width = 3500, height = 2200, res = 500)
+png(paste(path, "graficos/taxa_acumulo_diario.png", sep = ""), width = 3500, height = 2200, res = 300)
 p1 <- ggplot(mensal_diario, aes(x = fct_rev(reorder(mes, -month)), y = ganho_diario_med, color = cenario))+
   geom_line(aes(group = cenario))+
   geom_point()+
@@ -252,7 +252,7 @@ mensal$month <- as.integer(mensal$month)
 
 # Grafico de taxa mensal por bioma
 
-png(paste(path, "graficos/taxa_acumulo_mensal.png", sep = ""), width = 3500, height = 2200, res = 500)
+png(paste(path, "graficos/taxa_acumulo_mensal.png", sep = ""), width = 3500, height = 2200, res = 300)
 p2 <- ggplot(mensal, aes(x = fct_rev(reorder(mes, -month)), y = biom_med, color = cenario))+
   geom_line(aes(group = cenario))+
   geom_point()+
