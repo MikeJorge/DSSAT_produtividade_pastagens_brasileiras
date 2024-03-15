@@ -9,7 +9,7 @@ rm(list = ls())
 
 # Instalando os pacotes
 library(pacman)
-p_load(data.table, lubridate, ggplot2, RSQLite, tidyr, dplyr,rgdal, sf, raster, sp, tidyr)
+p_load(data.table, lubridate, ggplot2, RSQLite, tidyr, dplyr,sf, raster, sp, tidyr)
 
 # Fazendo a conexao com o banco
 path <- "D:/arquivos/doutorado_michael/DSSAT-BPPP/outputs/outptus_michael.db" #endereco do banco de dados
@@ -60,13 +60,20 @@ for (i in cenarios) {
   EPP <- 0.5 #variar a EPP em funcao do periodo: aguas (out-abr, maio-set)
   PAP$Dt <- with(PAP, TL_sup*CD/EPP)
   
-  # CFD (Cumulative Forage Deficit) e TL critica
+  # Organizando a base na escala diaria
   out_dia <- merge(out_dia, PAP, by = "ponto_simulacao")
   out_dia$inicio <- ifelse(out_dia$dia == '01' & out_dia$mes == '01', 1, 0)
   out_dia$data <- paste(out_dia$dia, out_dia$mes, sep = "/")
   out_dia$data <- as.Date(out_dia$data, format = "%d/%m")
   out_dia <- out_dia%>%arrange(ponto_simulacao, data)
   
+  # Calculando a demanda diaria com eficiencia de pastejo especifica pra cada periodo (aguas, seca)
+  EPP_aguas <- 0.7
+  EPP_seca <- 0.3
+  out_dia$mes <- as.numeric(out_dia$mes)
+  out_dia$Dt <- ifelse(out_dia$mes %in% c(10:12,1:4), (out_dia$TL_sup*CD/EPP_aguas), (out_dia$TL_sup*CD/EPP_seca))
+  
+  # CFD (Cumulative Forage Deficit) e TL critica
   cfd <-  out_dia$Dt[1] - out_dia$ganho_diario[1]
   out_dia$fd <- out_dia$Dt - out_dia$ganho_diario
   out_dia$fd <- ifelse(out_dia$fd < 0, 0, out_dia$fd)
