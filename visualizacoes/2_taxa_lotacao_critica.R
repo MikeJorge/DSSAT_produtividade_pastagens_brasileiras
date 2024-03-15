@@ -150,7 +150,7 @@ for (i in cenarios) {
 }
 
 # Exportando a tabela final
-write.table(tl_critica, "D:/arquivos/doutorado_michael/tabelas/taxa_lotacao_critica_cenarios.csv",
+write.table(tl_critica, "D:/arquivos/doutorado_michael/tabelas/taxa_lotacao_critica_cenarios_epp_variavel.csv",
             row.names = F, sep = ";")
 
 
