@@ -41,7 +41,7 @@ exporta <- function(i){
 taxas_list <- list(tlpot,tlext,tl1,tl2,tl3)
 export_label <- c("pot","ext", "1", "2", "3")
 
-for (n in 2:length(taxas_list)) {
+for (n in 1:length(taxas_list)) {
   print(sprintf("Construindo raster %s", n))
   # Definir o raster de taxa de lotacao
   taxa_lotacao <- taxas_list[[n]]
