@@ -38,25 +38,29 @@ for (i in 1:bss$n) {
 # Sumarizando os resultados
 base <- dbGetQuery(conn, "SELECT * FROM contagem_pixel_area_pastagem")
 
-uf_pred <- base %>% group_by(grid, uf)%>%
-                 arrange(desc(area))%>%
-                 mutate(uf_pred = first(uf))
+base <- subset(base, grid > 0)
 
-uf_pred <- uf_pred%>%group_by(grid)%>%mutate(uf_pred = first(uf_pred))
+uf_pred <- base %>% group_by(grid, uf)%>%
+                 summarise(area = sum(area, na.rm = T))%>%
+                 arrange(desc(area))%>%
+                 subset(uf > 0)%>%
+                 mutate(uf_pr = first(uf))
+
+uf_pred <- uf_pred%>%group_by(grid)%>%summarise(uf_pr = mean(uf_pr, na.rm = T))
 
 base <- base %>% group_by(grid)%>%
-  summarise(area_past_2022 = sum(area[past==1]))%>%
-  ungroup()
+  summarise(area_past_2022 = sum(area[past==1], na.rm = T))
 
 base <- merge(base, uf_pred, by = "grid")
-base$uf <- base$uf_pred
+base$uf <- base$uf_pr
 
 # Definindo a região admninistrativa do grid com base na uf predominante
-regioes <- fread(paste(path, "regioes_administrativas.csv"))
+regioes <- fread(paste(path, "regioes_administrativas.csv", sep = ""))
 base <- merge(base, regioes, by = "uf")
 
 base <- base[,c("grid", "uf", "nm_regiao", "area_past_2022")]
 colnames(base)[1] <- "ponto_simulacao"
+
 # Exportando a tabela
-write.table(base, paste(path, "area_pastagem_e_regiao_predominante_grid.csv"),
+write.table(base, paste(path, "area_pastagem_e_regiao_predominante_grid.csv", sep=""),
             row.names = F, sep = ";")
