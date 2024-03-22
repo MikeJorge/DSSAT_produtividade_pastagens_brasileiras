@@ -149,7 +149,7 @@ colnames(diario_3)[3] <- "ponto_simulacao"
 colnames(diario_pot)[3] <- "ponto_simulacao"
 colnames(diario_ext)[3] <- "ponto_simulacao"
 
-# Unindo a informacao de bioma e regiao
+# Unindo a informacao de bioma e nm_regiao
 diario_1 <- merge(diario_1, pontos_bioma[,c(1:2)], by = "ponto_simulacao", all.X =T)
 diario_2 <- merge(diario_2, pontos_bioma[,c(1:2)], by = "ponto_simulacao", all.X =T)
 diario_3 <- merge(diario_3, pontos_bioma[,c(1:2)], by = "ponto_simulacao", all.X =T)
@@ -170,22 +170,22 @@ diario_pot$cenario <- "Produtividade potencial"
 diario_ext$cenario <- "Bovinocultura extensiva"
 
 diario <- rbind(diario_1, diario_2, diario_3, diario_ext, diario_pot)
-mensal_diario <- drop_na(mensal_diario)
+diario <- drop_na(diario)
 
 # Agrupando por mes e bioma
 b_mensal_diario <- diario %>% group_by(month, bioma, cenario)%>%summarise(ganho_diario_med = mean(biomassa_diaria, na.rm = T),
                                                                        ganho_diario_sd = sd(biomassa_diaria, na.rm = T))
 
-# Agrupando por mes e regiao
-r_mensal_diario <- diario %>% group_by(month, regiao, cenario)%>%summarise(ganho_diario_med = mean(biomassa_diaria, na.rm = T),
+# Agrupando por mes e nm_regiao
+r_mensal_diario <- diario %>% group_by(month, nm_regiao, cenario)%>%summarise(ganho_diario_med = mean(biomassa_diaria, na.rm = T),
                                                                      ganho_diario_sd = sd(biomassa_diaria, na.rm = T))
 
 
 # Arrumando os labels mensais
-b_mensal_diario$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"),each = 3, times= 5)
+b_mensal_diario$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"),each = 15, times= 1)
 b_mensal_diario$month <- as.integer(b_mensal_diario$month)
 
-r_mensal_diario$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"),each = 3, times= 5)
+r_mensal_diario$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"),each = 25, times= 1)
 r_mensal_diario$month <- as.integer(r_mensal_diario$month)
 
 # Grafico de taxa diaria bioma
@@ -202,13 +202,13 @@ p1 <- ggplot(b_mensal_diario, aes(x = fct_rev(reorder(mes, -month)), y = ganho_d
   theme(text = element_text(size = 12)); p1
 dev.off()
 
-# Grafico de taxa diaria regiao
-png(paste(path, "graficos/taxa_acumulo_diario_regiao.png", sep = ""), width = 3500, height = 2200, res = 300)
+# Grafico de taxa diaria nm_regiao
+png(paste(path, "graficos/taxa_acumulo_diario_nm_regiao.png", sep = ""), width = 3500, height = 2200, res = 300)
 p2 <- ggplot(r_mensal_diario, aes(x = fct_rev(reorder(mes, -month)), y = ganho_diario_med, color = cenario))+
   geom_line(aes(group = cenario))+
   geom_point()+
   #geom_errorbar(aes(ymin = mensal_diario$ganho_diario_med - mensal_diario$ganho_diario_sd, ymax = ganho_diario_med + ganho_diario_sd))+
-  facet_wrap(~regiao, ncol = 2)+
+  facet_wrap(~nm_regiao, ncol = 2)+
   labs(x = "Mês",
        y = "Taxa de acúmulo diário de pastagem (kg MS/ha/dia)",
        color = "Cenário")+
@@ -218,7 +218,7 @@ dev.off()
 
 
 # Taxas mensais de produção de biomassa seca por bioma
-# Unindo a informacao de bioma e regiao nas bases
+# Unindo a informacao de bioma e nm_regiao nas bases
 colnames(pontos_bioma)[1] <- 'value'
 colnames(pontos_regiao)[1] <- 'value'
 mensal_1 <- merge(mensal_1, pontos_bioma[,1:2], by = "value", all.x = T)
@@ -253,16 +253,16 @@ mensal <- rbind(mensal_1, mensal_2, mensal_3, mensal_ext, mensal_pot)
 b_mensal <- mensal %>% group_by(month, bioma, cenario)%>%summarise(biom_med = mean(biomassa_mensal, na.rm = T),
                                                                 biom_sd = sd(biomassa_mensal, na.rm = T))
 
-# Agrupando por mes e por regiao
-r_mensal <- mensal %>% group_by(month, regiao, cenario)%>%summarise(biom_med = mean(biomassa_mensal, na.rm = T),
+# Agrupando por mes e por nm_regiao
+r_mensal <- mensal %>% group_by(month, nm_regiao, cenario)%>%summarise(biom_med = mean(biomassa_mensal, na.rm = T),
                                                               biom_sd = sd(biomassa_mensal, na.rm = T))
 
 
 # Arrumando os labels mensais
-b_mensal$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"),each = 3, times= 5)
+b_mensal$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"),each = 15, times= 1)
 b_mensal$month <- as.integer(b_mensal$month)
 
-r_mensal$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"),each = 3, times= 5)
+r_mensal$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"),each = 25, times= 1)
 r_mensal$month <- as.integer(r_mensal$month)
 
 # Grafico de taxa mensal por bioma
@@ -280,13 +280,13 @@ p3 <- ggplot(b_mensal, aes(x = fct_rev(reorder(mes, -month)), y = biom_med, colo
 dev.off()
 
 
-# Grafico de taxa mensal por regiao
-png(paste(path, "graficos/taxa_acumulo_mensal_regiao.png", sep = ""), width = 3500, height = 2200, res = 300)
+# Grafico de taxa mensal por nm_regiao
+png(paste(path, "graficos/taxa_acumulo_mensal_nm_regiao.png", sep = ""), width = 3500, height = 2200, res = 300)
 p4 <- ggplot(r_mensal, aes(x = fct_rev(reorder(mes, -month)), y = biom_med, color = cenario))+
   geom_line(aes(group = cenario))+
   geom_point()+
   #geom_errorbar(aes(ymin = mensal_diario$ganho_diario_med - mensal_diario$ganho_diario_sd, ymax = ganho_diario_med + ganho_diario_sd))+
-  facet_wrap(~regiao, ncol = 2)+
+  facet_wrap(~nm_regiao, ncol = 2)+
   labs(x = "Mês",
        y = "Taxa de acúmulo mensal de pastagem (kg MS/ha/mês)",
        color = "Cenário")+
@@ -310,7 +310,7 @@ anual_serie_3 <- merge(anual_serie_3, pontos_bioma[,1:2], by = "value", all.x = 
 anual_serie_pot <- merge(anual_serie_pot, pontos_bioma[,1:2], by = "value", all.x = T)
 anual_serie_ext <- merge(anual_serie_ext, pontos_bioma[,1:2], by = "value", all.x = T)
 
-# Unindo a regiao bioma
+# Unindo a nm_regiao bioma
 anual_serie_1 <- merge(anual_serie_1, pontos_regiao[,c(1,3)], by = "value", all.x = T)
 anual_serie_2 <- merge(anual_serie_2, pontos_regiao[,c(1,3)], by = "value", all.x = T)
 anual_serie_3 <- merge(anual_serie_3, pontos_regiao[,c(1,3)], by = "value", all.x = T)
@@ -336,8 +336,8 @@ anual_serie$year <- as.integer(anual_serie$year)
 
 # Agrupando por bioma e ano
 anual_serie <- subset(anual_serie, year > 1980)
-b_anual_serie <- b_anual_serie %>% group_by(year, bioma, cenario) %>% summarise(biomassa_anual = mean(biomassa_anual, na.rm = T))
-r_anual_serie <- r_anual_serie %>% group_by(year, regiao, cenario) %>% summarise(biomassa_anual = mean(biomassa_anual, na.rm = T))
+b_anual_serie <- anual_serie %>% group_by(year, bioma, cenario) %>% summarise(biomassa_anual = mean(biomassa_anual, na.rm = T))
+r_anual_serie <- anual_serie %>% group_by(year, nm_regiao, cenario) %>% summarise(biomassa_anual = mean(biomassa_anual, na.rm = T))
 
 # Grafico de taxa mensal por bioma
 png(paste(path, "graficos/serie_acumulo_anual_bioma.png", sep = ""), width = 3500, height = 2200, res = 300)
@@ -355,12 +355,12 @@ p5 <- ggplot(b_anual_serie, aes(x = fct_rev(reorder(year, -year)), y = biomassa_
 dev.off()
 
 # Grafico de taxa mensal por bioma
-png(paste(path, "graficos/serie_acumulo_anual_regiao.png", sep = ""), width = 3500, height = 2200, res = 300)
+png(paste(path, "graficos/serie_acumulo_anual_nm_regiao.png", sep = ""), width = 3500, height = 2200, res = 300)
 p6 <- ggplot(r_anual_serie, aes(x = fct_rev(reorder(year, -year)), y = biomassa_anual, color = cenario))+
   geom_line(aes(group = cenario))+
   geom_point()+
   #geom_errorbar(aes(ymin = mensal_diario$ganho_diario_med - mensal_diario$ganho_diario_sd, ymax = ganho_diario_med + ganho_diario_sd))+
-  facet_wrap(~regiao, ncol = 2)+
+  facet_wrap(~nm_regiao, ncol = 2)+
   scale_x_discrete(breaks = seq(min(anual_serie$year), max(anual_serie$year), by = 5))+
   labs(x = "Ano",
        y = "Acúmulo anual de pastagem (kg MS/ha/mês)",
