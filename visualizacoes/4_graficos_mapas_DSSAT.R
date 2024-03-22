@@ -122,7 +122,7 @@ pontosfiltro<- unique(pontos_filtro$ponto_simulacao)
 grid <- filter(grid, value %in% pontosfiltro)
 
 # Exportando resultado
-st_write(grid, paste(path, "shapefiles/BR_grid_resultados.shp", sep = ""), append = FALSE)
+#st_write(grid, paste(path, "shapefiles/BR_grid_resultados.shp", sep = ""), append = FALSE)
 
 
 # Gráficos ----
@@ -264,3 +264,55 @@ p2 <- ggplot(mensal, aes(x = fct_rev(reorder(mes, -month)), y = biom_med, color 
   theme_bw(base_family = "Times New Roman")+
   theme(text = element_text(size = 12)); p2
 dev.off()
+
+
+# Producao de biomassa anual ao longo da serie
+# Lendo as series anuais do banco
+anual_serie_1 <- dbGetQuery(conn,'select PONTO_SIMULACAO value, year, SUM(biomassa_mensal) biomassa_anual FROM mensal_1 GROUP BY PONTO_SIMULACAO, year')
+anual_serie_2 <- dbGetQuery(conn,'select PONTO_SIMULACAO value, year, SUM(biomassa_mensal) biomassa_anual FROM mensal_2 GROUP BY PONTO_SIMULACAO, year')
+anual_serie_3 <- dbGetQuery(conn,'select PONTO_SIMULACAO value, year, SUM(biomassa_mensal) biomassa_anual FROM mensal_3 GROUP BY PONTO_SIMULACAO, year')
+anual_serie_pot <- dbGetQuery(conn,'select PONTO_SIMULACAO value, year, SUM(biomassa_mensal) biomassa_anual FROM mensal_pot GROUP BY PONTO_SIMULACAO, year')
+anual_serie_ext <- dbGetQuery(conn,'select PONTO_SIMULACAO value, year, SUM(biomassa_mensal) biomassa_anual FROM mensal_ext GROUP BY PONTO_SIMULACAO, year')
+
+# Unindo o bioma
+anual_serie_1 <- merge(anual_serie_1, pontos_bioma[,1:2], by = "value", all.x = T)
+anual_serie_2 <- merge(anual_serie_2, pontos_bioma[,1:2], by = "value", all.x = T)
+anual_serie_3 <- merge(anual_serie_3, pontos_bioma[,1:2], by = "value", all.x = T)
+anual_serie_pot <- merge(anual_serie_pot, pontos_bioma[,1:2], by = "value", all.x = T)
+anual_serie_ext <- merge(anual_serie_ext, pontos_bioma[,1:2], by = "value", all.x = T)
+
+# Filtrando os biomas de interesse
+anual_serie_1 <- filter(anual_serie_1, bioma %in% c("Amazônia", "Cerrado", "Mata Atlântica"))
+anual_serie_2 <- filter(anual_serie_2, bioma %in% c("Amazônia", "Cerrado", "Mata Atlântica"))
+anual_serie_3 <- filter(anual_serie_3, bioma %in% c("Amazônia", "Cerrado", "Mata Atlântica"))
+anual_serie_pot <- filter(anual_serie_pot, bioma %in% c("Amazônia", "Cerrado", "Mata Atlântica"))
+anual_serie_ext <- filter(anual_serie_ext, bioma %in% c("Amazônia", "Cerrado", "Mata Atlântica"))
+
+# Definindo os cenarios e unindo as bases
+anual_serie_1$cenario <- "Baixa produtividade"
+anual_serie_2$cenario <- "Média produtividade"
+anual_serie_3$cenario <- "Alta produtividade"
+anual_serie_pot$cenario <- "Produtividade potencial"
+anual_serie_ext$cenario <- "Bovinocultura extensiva"
+
+anual_serie <- rbind(anual_serie_1, anual_serie_2, anual_serie_3, anual_serie_ext, anual_serie_pot)
+anual_serie$year <- as.integer(anual_serie$year)
+
+# Agrupando por bioma e ano
+anual_serie <- anual_serie %>% group_by(year, bioma, cenario) %>% summarise(biomassa_anual = mean(biomassa_anual, na.rm = T))
+anual_serie <- subset(anual_serie, year > 1980)
+# Grafico de taxa mensal por bioma
+png(paste(path, "graficos/serie_acumulo_anual.png", sep = ""), width = 3500, height = 2200, res = 300)
+p3 <- ggplot(anual_serie, aes(x = fct_rev(reorder(year, -year)), y = biomassa_anual, color = cenario))+
+  geom_line(aes(group = cenario))+
+  geom_point()+
+  #geom_errorbar(aes(ymin = mensal_diario$ganho_diario_med - mensal_diario$ganho_diario_sd, ymax = ganho_diario_med + ganho_diario_sd))+
+  facet_wrap(~bioma, ncol = 2)+
+  scale_x_discrete(breaks = seq(min(anual_serie$year), max(anual_serie$year), by = 5))+
+  labs(x = "Ano",
+       y = "Acúmulo anual de pastagem (kg MS/ha/mês)",
+       color = "Cenário")+
+  theme_bw(base_family = "Times New Roman")+
+  theme(text = element_text(size = 12)); p3
+dev.off()
+
