@@ -56,7 +56,7 @@ regioes <- fread(paste(path, "regioes_administrativas.csv"))
 base <- merge(base, regioes, by = "uf")
 
 base <- base[,c("grid", "uf", "nm_regiao", "area_past_2022")]
-
+colnames(base)[1] <- "ponto_simulacao"
 # Exportando a tabela
 write.table(base, paste(path, "area_pastagem_e_regiao_predominante_grid.csv"),
             row.names = F, sep = ";")
