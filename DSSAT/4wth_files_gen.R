@@ -1,21 +1,21 @@
-library(dplyr)
-library(sf)
-library(DSSAT)
-library(rcropmod)
-library(parallel)
-library(doSNOW)
-library(foreach)
-library(doParallel)
+# Instalando pacotes
+library(pacman)
+p_load(dplyr, sf, DSSAT, rcropmod, parallel, doSNOW, foreach, doParallel)
 
-
+# Limpando a area de trabalho
 rm(list=ls())
-#set
+
+# Configuracoes
 options(scipen = 999)
 options(stringsAsFactors = F)
-setwd('D:/arquivos/GPP/pastagens_IABS/PROTUDIVIDADE_POTENCIAL_PASTAGENS/DSSAT-BPPP')
-#unzip files if you havent yet
+
+#Definindo o diretorio (endereço onde o repositorio foi clonado)
+setwd('D:/arquivos/doutorado_michael/DSSAT-BPPP')
+
+# Extraia os arquivos zipados: se voce nao fez isso ainda, remova o # da linha abaixo e execute
 #unzip('data/climate/climate.rar', exdir = 'data/climate')
-#load required files
+
+# Carregando os arquivos
 grid.xavier <- st_read('data/grid/BR_grid.shp') #sirgas
 coords <- data.frame(sp::coordinates(as_Spatial(grid.xavier)))
 colnames(coords) <- c('x', 'y')
@@ -25,8 +25,7 @@ colnames(altitude) <- c('value', 'altitude')
 grid.xavier <- left_join(grid.xavier, altitude , by = c("value"="value"))
 uniqid <- readRDS("data/soil_ids/grid_id.rds")$id
 
-#dates
-#dates to fill the WTH files
+# Datas dos arquivos climaticos (WTH)
 anos <- seq(1980,2016, by = 1) %>%
   as.character
 mes <- c("01", "12")
@@ -34,7 +33,7 @@ dia <- c("01","31")
 inicio <- paste0('1980', '01', '01')
 fim <- paste0('2016', '12', '31')
 
-#parallel processing
+# Processamento paralelo
 cl <- makeSOCKcluster(16)
 registerDoSNOW(cl)
 clusterExport(cl, ls())
@@ -46,7 +45,7 @@ out <- foreach(u=grid.xavier$value) %dopar% {
   u <- which(grid.xavier$value==u)
   
   
-  #check if all observations of Tmax if bigger than Tmin
+  #Checando se todas as observacoes de Tmax sao maiores que Tmin
   if(all(rec$TMAX>rec$TMIN)) {
     
     
@@ -70,8 +69,8 @@ out <- foreach(u=grid.xavier$value) %dopar% {
       outdir = "C:/DSSAT48/Weather/")
     
     return(NULL) } else {
-      #if theres a problema                    
-      #increases 0.1  celsis tmin value and inputs
+      #se tiver algum problema                    
+      #aumente 0.1º C na TMax
       rec[which(rec$TMAX<rec$TMIN),'TMAX'] <- rec[which(rec$TMAX<rec$TMIN),'TMIN']+0.1
       
       
@@ -104,7 +103,7 @@ out <- foreach(u=grid.xavier$value) %dopar% {
 }
 
 #BUG::::weather() function misnaming files
-#rename files
+# Renomeando arquivos
 files <- list.files('C:/DSSAT48/Weather/', pattern = '.WTH')
 for (i in files) {
   

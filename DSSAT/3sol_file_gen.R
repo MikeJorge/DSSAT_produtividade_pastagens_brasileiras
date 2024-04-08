@@ -1,31 +1,39 @@
-library(dplyr)
-library(DSSAT)
-library(rcropmod)
-library(sf)
+# Instalando pacotes
+# Se nao tiver o pacote rcropmod ja instalado, rode as linhas a seguir:
+install.packages("devtools")
+library(devtools)
+install_github("ldemaz/dtraster")
+install_github("ldemaz/rcropmod", build_vignettes = TRUE)
 
-#installing rcropmod if you dont have
-#install.packages("devtools")
-#library(devtools)
-#install_github("ldemaz/dtraster")
-#install_github("ldemaz/rcropmod", build_vignettes = TRUE)
+library(pacman)
+p_load(dplyr, DSSAT, rcropmod, sf)
 
+# Limpando a area de trabalho
 rm(list=ls())
-#set
+
+# Configuracoes
 options(scipen = 999)
 options(stringsAsFactors = F)
-setwd('D:/arquivos/GPP/pastagens_IABS/PROTUDIVIDADE_POTENCIAL_PASTAGENS/DSSAT-BPPP')
-#load
+
+
+#Definindo o diretorio (endereço onde o repositorio foi clonado)
+setwd('D:/arquivos/doutorado_michael/DSSAT-BPPP')
+
+# Carregando dados
 modelo.sol <- read_sol(paste0('data/SOL/TEST.SOL'))
 grid.xavier <- st_read('data/grid/BR_grid.shp') #sirgas
 coords <- data.frame(sp::coordinates(as_Spatial(grid.xavier)))
 colnames(coords) <- c('x', 'y')
 grid.xavier <- st_as_sf(cbind(grid.xavier, coords))
-###load functions
+
+# Carregando funcoes
 source('codes/soil_hyd.R')
-####load files names
+
+# Carregando o nome dos arquivos
 zonals <- list.files('data/SoilGrids_data/');zonals
-###JOINING UP SOIL DATA WITH XAVIER GRID
-#Var names
+
+# Juntando dados de solo com os dados climaticos do Xavier
+# Nomes das variaveis
 vrs <- c('Clay', 'Sand', 'MOS', 'pH', 'SRTM', 'SLOPE', 'SWC')
 for (a in vrs) {
   
@@ -73,22 +81,22 @@ for (i in 1:nrow(grid.xavier)) {
   modelo.sol$`SCS FAMILY`[[1]] <- -99
   #COLOR
   modelo.sol$SCOM[[1]] <- -99
-  #ALBEDO GEN?RICO 0.2
+  #ALBEDO GENERICO 0.2
   modelo.sol$SALB[[1]] <- 0.2
-  #EVAPOTRANSPIRATION LIMIT
+  #LIMITE DE EVAPOTRANSIPIRACAO
   modelo.sol$SLU1[[1]] <- 6
-  #DRAINAGE RATE
+  #TAXA DE DRENAGEM
   modelo.sol$SLDR[[1]] <- sldr(grid.xavier$Clay_b0[i])
-  #RUNOFF CURVE
+  #CURVA DE RUNOFF
   modelo.sol$SLRO[[1]] <- slro( slo  = grid.xavier$slope[i] ,
                                 depth = 5 ,
                                 texture = soil_class(grid.xavier$Clay_b0[i],grid.xavier$Sand_b0[i] )   , 
                                 drainage = sldr(grid.xavier$Clay_b0[i]))  %>% as.numeric
-  #MINERALIZATION FACTOR
+  #FATOR DE MINERALIZACAO
   modelo.sol$SLNF <- 1
-  #PHOTOSINTESIS FACTOR
+  #FATOR DE FOTOSSINTESE
   modelo.sol$SLPF <- 1
-  #PH DETERMINATION METHOD NA
+  # METODO DE DETERMINACAO DO PH (NA)
   modelo.sol$SMHB <- -99
   modelo.sol$SMPX <- -99
   modelo.sol$SMKE <- -99
@@ -138,7 +146,8 @@ for (i in 1:nrow(grid.xavier)) {
   modelo.sol$SLHW[[1]] <- (grid.xavier[i, grep('pH', colnames(grid.xavier), value = T)] %>% st_drop_geometry() %>% as.numeric)/10  #no gee o ph é dado em pH*10 
   modelo.sol$SCEC[[1]] <- c(-99,-99,-99,-99,-99,-99)
   modelo.sol$SLCF <- -99
-  #replace TX for a non existent soil file
+  
+  # Mover o arquivo TX para um arquivo de solo nao existente
   write_sol(modelo.sol, paste0('C:/DSSAT48/Soil/','TX' , '.SOL'), append = T)
   print(i) 
   

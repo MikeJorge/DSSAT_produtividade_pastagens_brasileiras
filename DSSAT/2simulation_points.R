@@ -1,27 +1,28 @@
-library(raster)
-library(foreach)
-library(parallel)
-library(dplyr)
-library(sf)
-library(doSNOW)
+# Instalando pacotes
+library(pacman)
+p_load(raster, foreach, parallel, dplyr, sf, doSNOW)
 
+# Limpando a area de trabalho
 rm(list=ls())
-#set
+
+# Configuracoes
 options(scipen = 999)
 options(stringsAsFactors = T)
-#set folder to project folder
-setwd('D:/arquivos/GPP/pastagens_IABS/PROTUDIVIDADE_POTENCIAL_PASTAGENS/DSSAT-BPPP')
-#load
-pasture <- raster('data/pasture/pa_br_pastagens_30m_2020_LAPIG.tif')
+
+#Definindo o diretorio (endereço onde o repositorio foi clonado)
+setwd('D:/arquivos/doutorado_michael/DSSAT-BPPP')
+
+# Lendo os dados
+pasture <- raster('data/pasture/pa_br_pastagens_30m_2021_LAPIG.tif')
 grid <- raster('data/grid/pa_br_gridXavier_30m.tif')
 grid.values <- st_read('data/grid/pa_br_gridXavier.shp') %>% st_drop_geometry()
 grid.values$count <-  0
 
-#blocksize
+# Tamanho do bloco
 bs <- blockSize(pasture) ; bs
 
 
-#test prototype
+#Teste (prototipo)
 i <- 701
 dt <- data.frame(pasture = getValues(pasture, row = bs$row[i], nrows = bs$nrows[i]),
                  grid = getValues(grid, row = bs$row[i], nrows = bs$nrows[i]))
@@ -30,11 +31,10 @@ dt <- dt[!is.na(dt$pasture),]
 dt.agg <- aggregate(dt$pasture~dt$grid, FUN = 'sum')
 colnames(dt.agg) <- c('grid', 'pasture') ; dt.agg
 
-#create dir
-#create folder in data folder
+# Criando uma pasta para os dados dos pontos de simulacao na pasta 'data'
 if(!dir.exists('data/simulation_points')) dir.create('data/simulation_points')
 
-#parallel processing
+# Processamento paralelo
 cl <- makeSOCKcluster(16)
 registerDoSNOW(cl)
 clusterExport(cl, ls())
@@ -58,15 +58,19 @@ out.bind <- foreach(i=(1:bs$n), .combine = rbind) %dopar% {
   
   return(dt.agg)}; out.bind
 
-#bind and filter
+#Unindo os resultados e filtrando NAs
 out.bind <- out.bind %>% filter(!is.na(grid) | !is.na(count))
-#save
+
+# Salvando os resultados
 saveRDS(out.bind, 'data/simulation_points/out.rds')
-#aggregate
+
+# Agregando
 out.agg <- aggregate(count~grid,data = out.bind,  FUN = 'sum')
-#calc area
+
+#Calculo de area (0.09 = area em ha do pixel com 30m)
 out.agg$area_ha <- out.agg$count*0.09
-#save
+
+# Salvando o resultado agregado
 saveRDS(out.agg, 'data/simulation_points/simulation_points.rds')
 
 
