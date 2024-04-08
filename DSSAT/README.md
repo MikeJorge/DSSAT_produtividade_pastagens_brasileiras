@@ -1,6 +1,8 @@
-# DSSAT_produtividade_pastagens_brasileiras
-Rotinas de processamento necessárias para modelar e visualizar o crescimento da forrageira Marandu em diferentes cenários de fertilização, nos biomas Mata Atlântica, Cerrado e Amazônia.
+# DSSAT
+Passo a passo para executar o modelo do DSSAT para os 9873 pontos de simulação:
 
-Na pasta "DSSAT", estão os arquivos e rotinas necessárias para rodar o DSSAT para os 9873 pontos do grid que possuem algum pixel de pastagem, segundo o dado do LAPIG (2021).
+1- Faça o download da pasta 'data', cujo link está no arquivo link_download_data.txt
+2- Execute o script 5run_model.R
+    2.1 Altere o diretorio na linha 9, inserindo o endereço local da pasta na qual você clonou o repositório
 
-Na pasta "visualizacoes" estão as rotinas necessárias para gerar as tabelas, gráficos e mapas que nos permitem visualizar os resultados do DSSAT para os diferentes cenários, regiões e biomas.
+Os demais scripts foram usados para gerar os arwuivos auxiliares para a execução do modelo. Como esses arquivos já foram gerados uma vez, e estão armazenados na pasta 'data', não é necessário executa-los novamente.
