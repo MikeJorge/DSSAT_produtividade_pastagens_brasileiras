@@ -18,7 +18,7 @@ Script que calcula a área de pastagem do LAPIG (2022) por célula do grid. Ao e
 Script que gera os gráficos e arquivos necessários para geração dos mapas. Ao executa-lo, alterar a linha 15 com o endereço da pasta central do projeto.
 
 5_rasterize_gdal.txt:
-Linha de código que deve ser rodada no software OSGeo4WSHELL. Alterar o parametro -a manualmente, inserindo o nome da coluna que deseja rasterizar. Alterar os nomes do output com base no nome da coluna que está rasterizando.
+Linha de código que deve ser rodada no software OSGeo4WSHELL. Alterar o parametro -a manualmente, inserindo o nome da coluna que deseja rasterizar (verifique o nome das colunas no arquivo BR_grid_resultados.shp, gerado pelo script anterior). Alterar os nomes do output com base no nome da coluna que está rasterizando.
 
 6_rasters_taxa_lotacao.R:
 Script que gera os rasters de taxa de lotação no nível do pixel de pastagem do LAPIG 2022. Ao executa-lo, alterar a linha 15 com o endereço da pasta central do projeto.
