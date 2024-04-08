@@ -12,15 +12,14 @@ library(pacman)
 p_load(data.table, raster, dplyr, RSQLite)
 
 # Definindo o diretorio e lendo os dados
-setwd("D:/arquivos/doutorado_michael/rasters")
+path <- "D:/arquivos/doutorado_michael/produtividade_pastagens_brasileiras"  #endereco da pasta do projeto
 
-grid <- raster("grid.tif")
-pastagens <- raster("pa_br_pastagem_lapig_col8_30m_2022.tif")
-ufs <- raster("pa_br_uf_ibge_1-250000_2022.tif")
+grid <- raster(paste(path, "rasters/grid.tif", sep = "/"))
+pastagens <- raster(paste(path, "rasters/pa_br_pastagem_lapig_col8_30m_2022.tif", sep = "/"))
+ufs <- raster(paste(path, "rasters/pa_br_uf_ibge_1-250000_2022.tif", sep = "/"))
 
 # Criando o database SQLite
-path <- "D:/arquivos/doutorado_michael/tabelas/" #endereco local para salvar o arquivo .db
-conn <- dbConnect(SQLite(), paste(path, 'contagem_pixel_area_pastagem.db', sep = ""))
+conn <- dbConnect(SQLite(), paste(path, 'tabelas/contagem_pixel_area_pastagem.db', sep = "/"))
 
 # Contando pixel
 bss <- blockSize(grid)
@@ -55,12 +54,12 @@ base <- merge(base, uf_pred, by = "grid")
 base$uf <- base$uf_pr
 
 # Definindo a região admninistrativa do grid com base na uf predominante
-regioes <- fread(paste(path, "regioes_administrativas.csv", sep = ""))
+regioes <- fread(paste(path, "regioes_administrativas.csv", sep = "/"))
 base <- merge(base, regioes, by = "uf")
 
 base <- base[,c("grid", "uf", "nm_regiao", "area_past_2022")]
 colnames(base)[1] <- "ponto_simulacao"
 
 # Exportando a tabela
-write.table(base, paste(path, "area_pastagem_e_regiao_predominante_grid.csv", sep=""),
+write.table(base, paste(path, "tabelas/area_pastagem_e_regiao_predominante_grid.csv", sep="/"),
             row.names = F, sep = ";")

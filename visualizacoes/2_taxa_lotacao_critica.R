@@ -12,8 +12,8 @@ library(pacman)
 p_load(data.table, lubridate, ggplot2, RSQLite, tidyr, dplyr,sf, raster, sp, tidyr)
 
 # Fazendo a conexao com o banco
-path <- "D:/arquivos/doutorado_michael/DSSAT-BPPP/outputs/outptus_michael.db" #endereco do banco de dados
-conn <- dbConnect(SQLite(), path)
+path <- "D:/arquivos/doutorado_michael/produtividade_pastagens_brasileiras" #endereco do banco de dados
+conn <- dbConnect(SQLite(), paste(path, "DSSAT_produtividade_pastagens_brasileiras/DSSAT/outputs/outptus_michael.db", sep="/"))
 dbListTables(conn)
 
 # Verificando se houveram pontos onde o pasto morreu antes do fim da simulacao
@@ -150,7 +150,7 @@ for (i in cenarios) {
 }
 
 # Exportando a tabela final
-write.table(tl_critica, "D:/arquivos/doutorado_michael/tabelas/taxa_lotacao_critica_cenarios_epp_variavel.csv",
+write.table(tl_critica, paste(path, "tabelas/taxa_lotacao_critica_cenarios_epp_variavel.csv", sep = "/"),
             row.names = F, sep = ";")
 
 

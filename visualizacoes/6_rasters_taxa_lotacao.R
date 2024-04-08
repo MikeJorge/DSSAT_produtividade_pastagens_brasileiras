@@ -12,14 +12,14 @@ library(pacman)
 p_load(data.table, raster, dplyr)
 
 # Definindo o diretorio e lendo os dados
-setwd("D:/arquivos/doutorado_michael/rasters")
+path <- "D:/arquivos/doutorado_michael/produtividade_pastagens_brasileiras"  #endereco da pasta do projeto
 
-tlpot <- raster("tl_pot_grid.tif")
-tlext <- raster("tl_ext_grid.tif")
-tl1 <- raster("tl_1_grid.tif")
-tl2 <- raster("tl_2_grid.tif")
-tl3 <- raster("tl_3_grid.tif")
-pastagens <- raster("pa_br_pastagem_lapig_col8_30m_2022.tif")
+tlpot <- raster(paste(path, "rasters/tl_pot_grid.tif", sep = "/"))
+tlext <- raster(paste(path, "rasters/tl_ext_grid.tif", sep = "/"))
+tl1 <- raster(paste(path, "rasters/tl_1_grid.tif", sep = "/"))
+tl2 <- raster(paste(path, "rasters/tl_2_grid.tif", sep = "/"))
+tl3 <- raster(paste(path, "rasters/tl_3_grid.tif", sep = "/"))
+pastagens <- raster(paste(path, "rasters/pa_br_pastagem_lapig_col8_30m_2022.tif", sep = "/"))
 
 # Função para extrair a tabela e modificar os valores dos rasters
 fun_ex <- function(i){
@@ -51,8 +51,7 @@ for (n in 1:length(taxas_list)) {
   
   # Executar o processo
   out <- raster(pastagens)
-  path <- "D:/arquivos/doutorado_michael/rasters" #caminho local para exportar os rasters
-  out <- writeStart(out, filename = paste(path, sprintf("taxa_lotacao_pixel_cenario_%s.tif", cenario), sep = "/"),
+  out <- writeStart(out, filename = paste(path, sprintf("rasters/taxa_lotacao_pixel_cenario_%s.tif", cenario), sep = "/"),
                     overwrite=TRUE)
   
   for (i in 1:bss$n) {

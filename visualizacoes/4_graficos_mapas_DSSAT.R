@@ -12,16 +12,15 @@ library(pacman)
 p_load(data.table, lubridate, ggplot2, RSQLite, tidyr, dplyr,sf, raster, sp, tidyr, forcats, showtext)
 
 # Fazendo a conexao com o banco
-path <- "D:/arquivos/doutorado_michael/DSSAT-BPPP/outputs/outptus_michael.db" #endereco do banco de dados
-conn <- dbConnect(SQLite(), path)
+path <- "D:/arquivos/doutorado_michael/produtividade_pastagens_brasileiras"  #endereco da pasta do projeto
+conn <- dbConnect(SQLite(), paste(path, "DSSAT_produtividade_pastagens_brasileiras/DSSAT/outputs/outptus_michael.db"))
 dbListTables(conn)
 
 # Mapas com o grid de biomassa seca (mensal e anual)----
 # Ingerindo os dados
-path <- "D:/arquivos/doutorado_michael/" #endereco da pasta DSSAT-BPPP
-grid <- st_read(paste(path, "DSSAT-BPPP/data/grid/BR_grid.shp", sep = ""))
-pontos_bioma <- fread(paste(path, "tabelas/ponto_bioma.csv", sep = ""))
-pontos_regiao <- fread(paste(path, "tabelas/area_pastagem_e_regiao_predominante_grid.csv", sep = ""))
+grid <- st_read(paste(path, "DSSAT_produtividade_pastagens_brasileiras/DSSAT/data/grid/BR_grid.shp", sep = "/"))
+pontos_bioma <- fread(paste(path, "tabelas/ponto_bioma.csv", sep = "/"))
+pontos_regiao <- fread(paste(path, "tabelas/area_pastagem_e_regiao_predominante_grid.csv", sep = "/"))
 
 # Selecionando o bioma mais representativo de cada ponto
 pontos_bioma <- pontos_bioma %>%
@@ -102,7 +101,7 @@ names <- c("value","bio_ext_01", "bio_ext_02", "bio_ext_03", "bio_ext_04", "bio_
 colnames(w_mensal_ext) <- names
 
 # Lendo e organizando a taxa de lotacao critica
-tl_critica <- fread(paste(path, "tabelas/taxa_lotacao_critica_cenarios_epp_variavel.csv", sep = ""))
+tl_critica <- fread(paste(path, "tabelas/taxa_lotacao_critica_cenarios_epp_variavel.csv", sep = "/"))
 colnames(tl_critica)[1] <- "value"
 
 # Juntando os resultados na tabela de atributos do shape
@@ -123,7 +122,7 @@ pontosfiltro<- unique(pontos_filtro$ponto_simulacao)
 grid <- filter(grid, value %in% pontosfiltro)
 
 # Exportando resultado
-#st_write(grid, paste(path, "shapefiles/BR_grid_resultados.shp", sep = ""), append = FALSE)
+st_write(grid, paste(path, "shapefiles/BR_grid_resultados.shp", sep = "/"), append = FALSE)
 
 
 # Gráficos ----
@@ -189,7 +188,7 @@ r_mensal_diario$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "A
 r_mensal_diario$month <- as.integer(r_mensal_diario$month)
 
 # Grafico de taxa diaria bioma
-png(paste(path, "graficos/taxa_acumulo_diario_bioma.png", sep = ""), width = 3500, height = 2200, res = 300)
+png(paste(path, "graficos/taxa_acumulo_diario_bioma.png", sep = "/"), width = 3500, height = 2200, res = 300)
 p1 <- ggplot(b_mensal_diario, aes(x = fct_rev(reorder(mes, -month)), y = ganho_diario_med, color = cenario))+
   geom_line(aes(group = cenario))+
   geom_point()+
@@ -203,7 +202,7 @@ p1 <- ggplot(b_mensal_diario, aes(x = fct_rev(reorder(mes, -month)), y = ganho_d
 dev.off()
 
 # Grafico de taxa diaria nm_regiao
-png(paste(path, "graficos/taxa_acumulo_diario_nm_regiao.png", sep = ""), width = 3500, height = 2200, res = 300)
+png(paste(path, "graficos/taxa_acumulo_diario_nm_regiao.png", sep = "/"), width = 3500, height = 2200, res = 300)
 p2 <- ggplot(r_mensal_diario, aes(x = fct_rev(reorder(mes, -month)), y = ganho_diario_med, color = cenario))+
   geom_line(aes(group = cenario))+
   geom_point()+
@@ -266,7 +265,7 @@ r_mensal$mes <- rep(c("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "S
 r_mensal$month <- as.integer(r_mensal$month)
 
 # Grafico de taxa mensal por bioma
-png(paste(path, "graficos/taxa_acumulo_mensal_bioma.png", sep = ""), width = 3500, height = 2200, res = 300)
+png(paste(path, "graficos/taxa_acumulo_mensal_bioma.png", sep = "/"), width = 3500, height = 2200, res = 300)
 p3 <- ggplot(b_mensal, aes(x = fct_rev(reorder(mes, -month)), y = biom_med, color = cenario))+
   geom_line(aes(group = cenario))+
   geom_point()+
@@ -281,7 +280,7 @@ dev.off()
 
 
 # Grafico de taxa mensal por nm_regiao
-png(paste(path, "graficos/taxa_acumulo_mensal_nm_regiao.png", sep = ""), width = 3500, height = 2200, res = 300)
+png(paste(path, "graficos/taxa_acumulo_mensal_nm_regiao.png", sep = "/"), width = 3500, height = 2200, res = 300)
 p4 <- ggplot(r_mensal, aes(x = fct_rev(reorder(mes, -month)), y = biom_med, color = cenario))+
   geom_line(aes(group = cenario))+
   geom_point()+
@@ -340,7 +339,7 @@ b_anual_serie <- anual_serie %>% group_by(year, bioma, cenario) %>% summarise(bi
 r_anual_serie <- anual_serie %>% group_by(year, nm_regiao, cenario) %>% summarise(biomassa_anual = mean(biomassa_anual, na.rm = T))
 
 # Grafico de taxa mensal por bioma
-png(paste(path, "graficos/serie_acumulo_anual_bioma.png", sep = ""), width = 3500, height = 2200, res = 300)
+png(paste(path, "graficos/serie_acumulo_anual_bioma.png", sep = "/"), width = 3500, height = 2200, res = 300)
 p5 <- ggplot(b_anual_serie, aes(x = fct_rev(reorder(year, -year)), y = biomassa_anual, color = cenario))+
   geom_line(aes(group = cenario))+
   geom_point()+
@@ -355,7 +354,7 @@ p5 <- ggplot(b_anual_serie, aes(x = fct_rev(reorder(year, -year)), y = biomassa_
 dev.off()
 
 # Grafico de taxa mensal por bioma
-png(paste(path, "graficos/serie_acumulo_anual_nm_regiao.png", sep = ""), width = 3500, height = 2200, res = 300)
+png(paste(path, "graficos/serie_acumulo_anual_nm_regiao.png", sep = "/"), width = 3500, height = 2200, res = 300)
 p6 <- ggplot(r_anual_serie, aes(x = fct_rev(reorder(year, -year)), y = biomassa_anual, color = cenario))+
   geom_line(aes(group = cenario))+
   geom_point()+

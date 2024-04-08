@@ -17,7 +17,7 @@ conn <- dbConnect(SQLite(), path)
 dbListTables(conn)
 
 # Fazendo o upload no banco da tabela de depreciacao da produtividade por plantas daninhas
-setwd("D:/arquivos/GPP/git_workspace/") #endereco da pasta onde o repositorio foi clonado
+setwd("D:/arquivos/doutorado_michael/produtividade_pastagens_brasileiras/") #endereco da pasta onde o repositorio foi clonado
 tabela_pd <- fread("DSSAT_produtividade_pastagens_brasileiras/DSSAT/data/depreciacao_plantas_daninhas.csv")
 dbWriteTable(conn, "depreciacao_plantas_daninhas", tabela_pd, overwrite = TRUE)
 
