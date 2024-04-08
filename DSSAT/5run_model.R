@@ -6,7 +6,7 @@ p_load(DSSAT, dplyr, sf, lubridate, rcropmod, RSQLite, raster, ggplot2, readr, f
 rm(list=ls())
 
 #Definindo o diretorio (endereço onde o repositorio foi clonado)
-setwd('D:/arquivos/doutorado_michael/DSSAT-BPPP')
+setwd('D:/arquivos/doutorado_michael/produtividade_pastagens_brasileiras/DSSAT_produtividade_pastagens_brasileiras/DSSAT')
 
 # Configuracoes
 options(DSSAT.CSM = 'C:/DSSAT48/DSCSM048.EXE')
