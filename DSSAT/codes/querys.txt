@@ -1,3 +1,5 @@
+# Solicitação de informações junto ao banco de dados
+
 create table output_2 as 
 select ppg.DATE, ppg.value PONTO_SIMULACAO, ppg.CWAD CWAD_ORIGINAL, ppg2.CWAD CWAD_LAG, 
 ppg.HERB-(ppg2.CWAD-ppg.CWAD) GANHO_DIARIO_CWAD, STRFTIME('%d', ppg.DATE) as 'day', STRFTIME('%m', ppg.DATE) as 'month', STRFTIME('%Y', ppg.DATE) as 'year'
