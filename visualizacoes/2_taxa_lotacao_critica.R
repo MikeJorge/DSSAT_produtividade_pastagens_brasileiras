@@ -1,6 +1,5 @@
 ########################################
 # Calculo da taxa de lotacao critica
-# Pietro Gragnolati Fernandes
 # 15/02/2024
 ########################################
 
