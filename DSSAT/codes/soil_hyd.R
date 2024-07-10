@@ -1,3 +1,8 @@
+###########################################################################################################
+# A função `soil_hydraulics` calcula várias propriedades hidráulicas do solo, como ponto de murcha, 
+# capacidade de campo, conteúdo de umidade saturada, densidade do solo, condutividade hidráulica saturada e água disponível para as plantas, 
+# com base nas frações de areia, argila, matéria orgânica, densidade e cascalho.
+#############################################################################################################
 #function
 soil_hydraulics <- function(sand, clay, soc, DF = 1, gravel = 0, digits = 4, 
                             PAW = TRUE) {
