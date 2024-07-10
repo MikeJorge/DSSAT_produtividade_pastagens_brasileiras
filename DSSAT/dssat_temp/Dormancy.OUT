@@ -1,3 +1,9 @@
+##########################################################################################################################################
+# Os resultados fornecem uma visão da simulação de dormência das plantas no modelo DSSAT ao longo dos anos (1980 a 2016). 
+# Cada linha de dados corresponde a um dia específico e inclui uma variedade de métricas relacionadas ao crescimento e condições ambientais
+# das plantas. Esses dados podem ser utilizados para analisar o comportamento das plantas em condições específicas de dormência.
+##########################################################################################################################################
+
 *PLANT DORMANCY OUTPUT FILE
 
 *DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
