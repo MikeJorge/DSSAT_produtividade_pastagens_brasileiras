@@ -1,6 +1,5 @@
 ############################################################################
 # Área de pastagem e região administrativa predominante por célula do grid
-# Pietro Gragnolati Fernandes
 # 15/03/2024
 ############################################################################
 
