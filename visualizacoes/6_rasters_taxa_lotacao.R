@@ -1,6 +1,5 @@
 ##########################################
 # Criando os rasters de taxa de lotacao
-# Pietro Gragnolati Fernandes
 # 07/03/2024
 ##########################################
 
