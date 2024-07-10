@@ -1,3 +1,8 @@
+#####################################################################
+# O script do arquivo de lote (batch) configura e inicia a execução de uma simulação no DSSAT, utilizando o arquivo de entrada
+# `SPPI7902.BRX` e aplicando o tratamento 1 com uma repetição, sem sequência, operação ou condição adicionais.
+######################################################################
+
 $BATCH
 @FILEX                                                                                        TRTNO     RP     SQ     OP     CO
 C:/DSSAT48/Brachiaria/SPPI7902.BRX                                                                1      1      0      0      0
