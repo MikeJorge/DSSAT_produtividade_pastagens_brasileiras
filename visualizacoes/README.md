@@ -1,6 +1,6 @@
 # Visualizações
 
-Esta pasta contém os scripts necessários para gerar as visualizações dos resultados do modelo do DSSAT, além da conversão da produtividade de biomassa em taxa de lotação.
+Esta pasta contém os scripts necessários para gerar as visualizações dos resultados do modelo DSSAT, visando à integração com o modelo híbrido de simulação Módulo Mínimo (MHSMM), além da conversão da produtividade de biomassa em taxa de lotação.
 
 1_tabelas_biomassa_mensal_diaria.R:
 Script que gera as tabelas de produção diaria e mensal para o ano modelo e armazena no banco de dados. Ao executa-lo, deve-se alterar o diretorio na linha 20, para o endereço da pasta central do projeto.
