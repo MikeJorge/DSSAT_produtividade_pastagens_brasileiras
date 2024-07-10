@@ -1,3 +1,8 @@
+##########################################################################################################################################
+# O script configura a simulação no DSSAT, utilizando o arquivo de entrada SPPI7902.BRX localizado no diretório C:/DSSAT48/Brachiaria/, 
+# aplicando o tratamento número 1 com uma repetição, sem sequência, operação ou condição adicionais.
+###########################################################################################################################################
+
 $BATCH
 @FILEX                                                                                        TRTNO     RP     SQ     OP     CO
 C:/DSSAT48/Brachiaria/SPPI7902.BRX                                                                1      1      0      0      0
