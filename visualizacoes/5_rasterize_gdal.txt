@@ -1,2 +1,2 @@
-# Rasterizando um shapefile com as configurações padrão Laboratório de Processamento de Imagens e Geoprocessamento (Lapig)
+# Rasterizando um shapefile com as configurações padrão do Laboratório de Processamento de Imagens e Geoprocessamento (Lapig)
 gdal_rasterize -l BR_grid_resultados -a_srs EPSG:4326 -a tl_3 -a_nodata -9999 -tr 0.000269494585235856472 -0.000269494585235856472 -te -74.8973961395787597 -34.7917509539490695 -33.0613262221496385 7.9120915279395101 -ot Float32 -of GTiff -co "COMPRESS=DEFLATE" -co "ZLEVEL=9" D:\arquivos\doutorado_michael\shapefiles\BR_grid_resultados.shp D:\arquivos\doutorado_michael\rasters\tl_3_grid.tif
