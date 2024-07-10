@@ -1,3 +1,8 @@
+###########################################################################################################
+# O script configura e executa a simulação da forrageira no DSSAT, definindo detalhes do experimento, parâmetros de controle, manejo automático, tratamentos, cultivares, 
+# campos experimentais, condições iniciais, plantio, irrigação, aplicação de fertilizantes, resíduos, produtos químicos, aragem, condições ambientais e colheita.
+#############################################################################################################
+
 *EXP.DETAILS: SPPI7902BR                                                             
 
 *FILES
