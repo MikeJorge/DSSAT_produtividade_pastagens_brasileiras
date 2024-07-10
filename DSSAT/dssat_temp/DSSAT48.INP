@@ -1,3 +1,8 @@
+################################################################################################
+# O script especifica todos os parâmetros necessários e utilizados para realizar a simulação do 
+# cultivo de Urochloa brizantha cv. Marandu em um experimento agrícola.
+################################################################################################
+
 *MODEL INPUT FILE            B     1     1     1   999     0
 *FILES              
 MODEL          PRFRM048
