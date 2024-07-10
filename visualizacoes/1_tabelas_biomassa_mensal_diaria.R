@@ -1,6 +1,5 @@
 ##################################################
 # Processamento dos resultados do DSSAT - Marandu
-# Pietro Gragnolati Fernandes
 # 08/02/2024
 ##################################################
 
