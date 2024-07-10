@@ -1,8 +1,8 @@
-Dicionário - nome e conteúdo das tabelas do banco de dados.
+Dicionário - nome e conteúdo das tabelas contidas no banco de dados.
 
 Todas as tabelas foram nomeadas da seguinte forma: nometabela_cenario
 
-Sendo os cenários definidos: 1 (baixa produtividade), 2 (média produtividade), 3 (alta produtividade), pot (potencial) e ext (extensivo)
+Sendo os cenários definidos: 1 (baixa produtividade), 2 (média produtividade), 3 (alta produtividade), pot (potencial) e ext (extensivo). No entanto, ao serem integradas no MHSMM a denominação adotadas foram: Bovinocultura  extensiva  (Be),  Produtividade  baixa  (Pb),  Produtividade  média  (Pm), Produtividade alta  (Pa)  e  Produtividade  potencial  (Pp).
 
 Nomes das tabelas:
 PlantGro: output original do DSSAT
