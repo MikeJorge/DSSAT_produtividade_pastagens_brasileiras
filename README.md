@@ -12,5 +12,5 @@ As rotinas de processamento descritas nesta pasta são essenciais para modelar e
 
 4. Pasta "visualizacoes": Contém as rotinas necessárias para gerar tabelas, gráficos e mapas que permitem a visualização dos resultados do DSSAT para os diferentes cenários, regiões e biomas.
 
-Essas rotinas são fundamentais para a análise detalhada e precisa dos dados de crescimento da forrageira, contribuindo para uma melhor compreensão e planejamento no contexto da bovinocultura em pasto em diferentes biomas brasileiros, bem como para a definição posterior do módulo mínimo através da integração e uso do modelo híbrido de simulação Módulo Mínimo (MHSMM), disponível neste link: [Módulo Mínimo](https://github.com/MikeJorge/modulo-minimo-MHSMM.git).
+Essas rotinas são fundamentais para a análise detalhada e precisa dos dados de crescimento da forrageira, contribuindo para uma melhor compreensão e planejamento no contexto da bovinocultura em pasto em diferentes biomas brasileiros, bem como para a definição posterior do módulo mínimo através da integração e uso do modelo híbrido de simulação Módulo Mínimo (MHSMM) descrito por Jorge (2024), disponível neste link: [Módulo Mínimo](https://github.com/MikeJorge/modulo-minimo-MHSMM.git).
 
