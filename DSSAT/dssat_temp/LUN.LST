@@ -1,3 +1,8 @@
+##################################################################################################################
+# O resultado fornece informações sobre a versão do modelo DSSAT, a data e a hora de lançamento. 
+# Em seguida, ele lista os arquivos e unidades de saída gerados durante a simulação. As variáveis incluem o código da unidade (Unit), seguido pelo nome do arquivo (Filename).
+##################################################################################################################
+
 *DSSAT Cropping System Model Ver. 4.8.0.027   -release    FEB 01, 2024; 15:59:10
 
  Unit  Filename
