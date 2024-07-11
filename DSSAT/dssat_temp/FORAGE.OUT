@@ -1,3 +1,14 @@
+###########################################################################################################################################################################
+# Os resultados da simulação de colheita de forragem no modelo DSSAT. Cada linha de dados corresponde a um evento de colheita específico e inclui uma variedade de
+# métricas. O número da execução da simulação (RUN), o arquivo de entrada da simulação (FILEX), o código da cultura (CR, onde BR representa Brachiaria), o número do 
+# tratamento (TRNO), o número da colheita (FHNO), o ano da colheita (YEAR), o dia do ano da colheita (DOY), o peso da forragem colhida (RCWAH, em kg/ha), o peso da 
+# forragem morta colhida (RLWAH, em kg/ha), o peso da forragem senescente colhida (RSWAH, em kg/ha), o peso da raiz senescente colhida (RSRWH, em kg/ha), o peso total da 
+# raiz colhida (RRTWH, em kg/ha), o índice de área foliar relativa (RLAIH), o peso da forragem fresca colhida (FHWAH, em kg/ha), o conteúdo de nitrogênio na forragem
+# colhida (FHNAH, em kg/ha), o percentual de nitrogênio na forragem colhida (FHN%H), o percentual de carbono na forragem colhida (FHC%H), o peso da forragem seca colhida 
+# (FHLGH, em kg/ha) e o percentual de umidade na forragem colhida (FHL%H). 
+# Esses dados são essenciais para avaliar e estimar a produtividade da forragem sob diferentes condições de manejo e ambientais ao longo do tempo.
+############################################################################################################################################################################
+
 *Forage Model Harvest Output: SPPI7902BR  DSSAT Cropping System Model Ver. 4.8.0.027   -release    FEB 01, 2024; 15:59:10
 
 @RUN FILEX    CR TRNO FHNO YEAR DOY RCWAH RLWAH RSWAH RSRWH RRTWH RLAIH FHWAH FHNAH FHN%H FHC%H FHLGH FHL%H
