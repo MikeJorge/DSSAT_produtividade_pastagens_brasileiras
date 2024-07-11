@@ -1,3 +1,12 @@
+###################################################################################################################################################################################################
+# Os resultados exibe as emissões de gases de efeito estufa no modelo DSSAT, incluindo as emissões diárias e acumuladas de CO2, N2O e CH4, bem como suas equivalências em CO2.
+# Cada linha de dados corresponde a um dia específico e inclui as seguintes variáveis: ano da simulação (YEAR), dia do ano (DOY), dias após a semeadura (DAS),
+# emissões diárias de CO2 (CO2ED, em g[C]/ha), emissões diárias de N2O (N2OED, em g[N]/ha), emissões diárias de CH4 (CH4ED, em g[C]/ha), emissões acumuladas de CO2
+# (CO2EC, em kg[C]/ha), emissões acumuladas de N2O (N2OEC, em kg[N]/ha), emissões acumuladas de CH4 (CH4EC, em kg[C]/ha), equivalente acumulado de CO2 em CO2 (CCEQC, em
+# kg[CO2eq]/ha), equivalente acumulado de CO2 em N2O (NCEQC, em kg[CO2eq]/ha), equivalente acumulado de CO2 em CH4 (MCEQC, em kg[CO2eq]/ha) e equivalente total de CO2 (TCEQC, em kg[CO2eq]/ha). 
+# Esses dados são essenciais para avaliar o impacto ambiental das práticas agrícolas em termos de emissões de gases de efeito estufa ao longo do tempo.
+###################################################################################################################################################################################################
+
 *GHG emissions output file
 
 *DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
