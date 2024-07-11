@@ -1,3 +1,10 @@
+###########################################################################################################################################################################
+# Os resultados diários da simulação de cobertura morta na superfície do solo no modelo DSSAT. Cada linha de dados corresponde a um dia específico e inclui informações
+# sobre o ano da simulação, dia do ano, dias após a semeadura, fração de cobertura morta (MCFD), profundidade da cobertura morta (MDEPD), peso da água na cobertura morta
+# (MWAD) e peso total da cobertura morta (MWTD). Esses dados são essenciais para entender a dinâmica da cobertura morta na superfície do solo ao longo do tempo e seu 
+# impacto nas condições de crescimento das plantas.
+###########################################################################################################################################################################
+
 *Surface Mulch daily output file
 
 *DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
