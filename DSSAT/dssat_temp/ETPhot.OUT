@@ -1,3 +1,10 @@
+#############################################################################################################################################################################################
+# Os resultados diários da simulação de evapotranspiração e fotossíntese no modelo DSSAT. Cada linha de dados corresponde a um dia específico e inclui as seguintes variáveis:
+# ano da simulação (YEAR), dia do ano (DOY), dias após a semeadura (DAS), percentual de interceptação de luz (LI%D), fotossíntese diária (PHAD), fotossíntese acumulada (PHAN), percentual de interceptação de luz durante a noite (LI%N),  
+# comprimento da folha diário (SLLN), comprimento da folha acumulado (SLHN), nitrogênio na folha diário (N%LN), nitrogênio na folha acumulado (N%HN), massa da folha diária (LMLN), massa da folha acumulada (LMHN), temperatura mínima do solo (TGON)
+# e temperatura média do solo (TGAV). Esses dados são essenciais para entender o desempenho das plantas em resposta às condições ambientais e práticas de manejo ao longo do tempo.
+##############################################################################################################################################################################################
+
 *EVAPOTRANSPIRATION / PHOTOSYNTHESIS DAILY OUTPUT FILE
 
 *DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
