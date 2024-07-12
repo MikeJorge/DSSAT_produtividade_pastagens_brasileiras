@@ -1,3 +1,10 @@
+##########################################################################################################################################
+# O script carrega os pacotes necessários, limpa o ambiente de trabalho, define o diretório de trabalho, lê a grade geográfica do Brasil,
+# define uma função para gerar IDs únicos, cria um diretório para armazenar esses IDs e finalmente gera e salva os IDs únicos em um arquivo.
+#  Isso é útil para garantir que cada ponto na grade geográfica tenha um identificador exclusivo para análises subsequentes.
+###########################################################################################################################################
+
+
 # Instalando pacotes
 library(pacman)
 p_load(stringr, sf)
