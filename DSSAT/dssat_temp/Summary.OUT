@@ -1,3 +1,11 @@
+########################################################################################################################################################
+# resumo abrangente dos resultados da simulação do modelo DSSAT para o experimento SPPI7902BR. Ele abrange uma ampla gama de variáveis, incluindo 
+# identificadores, informações do experimento e tratamento, dados do local, datas importantes, componentes de rendimento, água, nitrogênio, fósforo,
+# potássio, matéria orgânica, produtividade da água e do nitrogênio, e dados ambientais sazonais. Esses dados são essenciais para entender as condições 
+# de crescimento das plantas, o uso de nutrientes e água, e as emissões de gases de efeito estufa durante o ciclo de cultivo.
+##########################################################################################################################################################
+
+
 *SUMMARY : SPPI7902BR                                                              DSSAT Cropping System Model Ver. 4.8.0.027   -release    FEB 01, 2024; 15:59:10
 
 !IDENTIFIERS......................... EXPERIMENT AND TREATMENT.......... SITE INFORMATION............................................................. DATES..................................................  DRY WEIGHT, YIELD AND YIELD COMPONENTS........................................   FRESH WEIGHT.........................  WATER...............................................  NITROGEN..................................................  PHOSPHORUS............  POTASSIUM.............  ORGANIC MATTER.................................................    WATER PRODUCTIVITY..................................................    NITROGEN PRODUCTIVITY...........  SEASONAL ENVIRONMENTAL DATA (Planting to harvest)..............
