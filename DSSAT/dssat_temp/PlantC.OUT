@@ -1,3 +1,14 @@
+#########################################################################################################################################
+# os resultados diários da simulação de carbono das plantas no modelo DSSAT. Cada linha de dados corresponde a um dia específico e 
+# inclui informações sobre o ano da simulação, dia do ano, dias após a semeadura, dias após o plantio, biomassa total acima do solo, 
+# fotossíntese acumulada diária, carbono na biomassa total, crescimento do carbono, respiração da planta, respiração da manutenção, 
+# carboidratos armazenados, carbono no solo, percentual de carbono na folha, percentual de carbono no caule, percentual de carbono na 
+# cultura, percentual de carbono nas raízes, temperatura mínima do solo, temperatura média do solo, percentual de nitrogênio na folha, 
+# percentual de nitrogênio no caule e percentual de nitrogênio na cultura. Esses dados são essenciais para entender a dinâmica do carbono 
+# nas plantas ao longo do tempo e seu impacto nas condições de crescimento das plantas.
+########################################################################################################################################
+
+
 *PLANT C OUTPUT FILE
 
 *DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
