@@ -1,3 +1,9 @@
+########################################################################################################################################
+# o script SQL cria tabelas para armazenar os dados de ganhos diários de biomassa seca da cultura (CWAD), calcula esses ganhos 
+# diariamente e os agrupa em resumos mensais e diários. As tabelas output_mensal_2 e output_diario_2 são geradas a partir dos cálculos 
+# intermediários armazenados na tabela output_2.
+##########################################################################################################################################
+
 # Solicitação de informações junto ao banco de dados
 
 create table output_2 as 
