@@ -1,7 +1,11 @@
-##########################################
+##################################################################################################################################
 # Criando os rasters de taxa de lotacao
 # 07/03/2024
-##########################################
+# O script processa rasters de taxa de lotação para diferentes cenários, aplicando uma máscara baseada em valores de pastagens. 
+# Ele lê os dados de rasters, define funções para extrair e modificar valores, e usa um loop para processar os dados em blocos. 
+# Os resultados são exportados para novos arquivos TIFF, permitindo a análise de taxa de lotação em pixels de pastagem para cada 
+# cenário definido.
+####################################################################################################################################
 
 # Limpando a area de trabalho
 rm(list=ls())
