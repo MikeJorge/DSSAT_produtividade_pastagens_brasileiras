@@ -1,3 +1,13 @@
+##################################################################################################################################################################################
+# os resultados diários da simulação de nitrogênio nas plantas no modelo DSSAT. Cada linha de dados corresponde a um dia específico e inclui as seguintes variáveis: 
+# ano da simulação (YEAR), dia do ano (DOY), dias após a semeadura (DAS), dias após o plantio (DAP), conteúdo total de nitrogênio nas plantas (CNAD), conteúdo de nitrogênio 
+# na biomassa verde (GNAD), conteúdo de nitrogênio nas partes vegetativas (VNAD), percentual de nitrogênio na biomassa verde (GN%D), percentual de nitrogênio nas partes 
+# vegetativas (VN%D), fixação de nitrogênio cumulativa (NFXC), nitrogênio absorvido cumulativo (NUPC), conteúdo de nitrogênio nas folhas (LNAD), conteúdo de nitrogênio no caule (SNAD), 
+# conteúdo de nitrogênio nos órgãos de armazenamento (QNAD), percentual de nitrogênio nas folhas (LN%D), percentual de nitrogênio no caule (SN%D), percentual de nitrogênio nos órgãos 
+# de armazenamento (QN%D), conteúdo de nitrogênio na bainha (SHND), percentual de nitrogênio nas raízes (RN%D) e fixação de nitrogênio diária (NFXD). 
+# Esses dados são essenciais para entender a dinâmica do nitrogênio nas plantas ao longo do tempo e seu impacto nas condições de crescimento das plantas.
+###########################################################################################################################################################################################
+
 *PLANT N OUTPUT FILE
 
 *DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
