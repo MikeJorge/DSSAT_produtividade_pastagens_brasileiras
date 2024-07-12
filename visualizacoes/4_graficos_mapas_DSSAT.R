@@ -1,7 +1,11 @@
-############################################################################
+###########################################################################################################################################
 # Gráficos e mapas dos resultados do DSSAT para os 5 cenários
 # 15/02/2024
-############################################################################
+# O script realiza a leitura, processamento e análise de dados de biomassa seca em diferentes cenários de produtividade para pastagens. 
+# Conecta-se a um banco de dados SQLite, lê dados de shapefiles e arquivos CSV, e executa consultas SQL para agregar dados mensais e anuais.
+# Resultados são exportados para um shapefile e visualizados em gráficos que mostram a taxa de acúmulo diário e mensal de biomassa seca por
+# bioma e região administrativa, bem como a produção anual de biomassa ao longo do tempo.
+############################################################################################################################################
 
 # Limpando a área de trabalho
 rm(list = ls())
