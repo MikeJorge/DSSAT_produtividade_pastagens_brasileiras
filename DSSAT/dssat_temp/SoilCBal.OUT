@@ -1,3 +1,12 @@
+##########################################################################################################################################
+# O balanço de carbono no solo utilizando o modelo DSSAT. Ele compara os valores iniciais e finais de carbono orgânico no solo, carbono da 
+# serapilheira, metano armazenado no solo, e carbono total nas camadas do solo e da superfície. Além disso, ele inclui as adições e remoções 
+# de carbono, como carbono em resíduos de colheitas, carbono de aplicações orgânicas, carbono em material senescente retornado, carbono emitido 
+# como CO2 e CH4, carbono lixiviado como CH4, e carbono absorvido pela planta como CH4. O balanço total de carbono é apresentado, mostrando a 
+# diferença entre os valores iniciais e finais. Esses dados são essenciais para entender a dinâmica do carbono no solo e seu impacto nas condições 
+# de crescimento das plantas.
+###################################################################################################################################################
+
 *Soil Carbon Balance
 
 *DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
