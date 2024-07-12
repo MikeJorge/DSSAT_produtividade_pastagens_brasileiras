@@ -1,7 +1,12 @@
-##################################################
+##############################################################################################################################################
 # Processamento dos resultados do DSSAT - Marandu
 # 08/02/2024
-##################################################
+# O script realiza uma análise de produtividade de pastagens considerando diferentes cenários e fatores de depreciação por plantas daninhas.
+# Ele faz uso de diversas bibliotecas R para manipulação de dados e interação com um banco de dados SQLite. As etapas principais incluem a
+# instalação de pacotes, conexão com o banco de dados, upload de dados, criação de tabelas de saída e agregação dos resultados em escalas 
+# diárias e mensais. As consultas SQL são utilizadas extensivamente para processar os dados e calcular métricas de produtividade, resultando
+# em tabelas que facilitam a análise e modelagem da biomassa ao longo do tempo.
+##############################################################################################################################################
 
 # Limpando a area de trabalho
 rm(list = ls())
