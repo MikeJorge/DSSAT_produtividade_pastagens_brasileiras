@@ -1,3 +1,10 @@
+###############################################################################################################################################
+# No script, foram modeladas as variáveis climáticas, incluindo SRAD (radiação solar), TMAX (temperatura máxima), TMIN (temperatura mínima),
+# RAIN (precipitação), WIND (velocidade do vento), RHUM (umidade relativa), EA (pressão de vapor do ar) e TDEW (ponto de orvalho), 
+# para gerar arquivos climáticos que foram utilizados no modelo de simulação de cultura DSSAT.
+###############################################################################################################################################
+
+
 # Instalando pacotes
 library(pacman)
 p_load(dplyr, sf, DSSAT, rcropmod, parallel, doSNOW, foreach, doParallel)
