@@ -1,3 +1,15 @@
+#########################################################################################################################################
+# O script executa a integração dos dados de solo e clima para a modelagem no DSSAT, usando processamento em série para cada célula da grade. Ele lê dados
+# de solo e clima, calcula propriedades hidráulicas e outros parâmetros do solo, e escreve os dados no formato necessário para o DSSAT.
+# Na modelagem do solo para simulação no DSSAT, são considerados parâmetros como Clay (percentual de argila), Sand (percentual de areia),
+# MOS (matéria orgânica do solo), pH (acidez ou alcalinidade), SRTM (altitude do solo), Slope (declividade do terreno) e SWC (conteúdo 
+# de água no solo), que juntos fornecem uma descrição detalhada das características físicas e químicas do solo.
+# Os parâmetros do solo calculados incluem textura (argila, areia), densidade do solo (SBDM), capacidade de campo (SDUL), ponto de murcha
+# permanente (SLLL), capacidade de saturação (SSAT), condutividade hidráulica (SSKS), carbono orgânico do solo (SLOC), pH (SLHW), curva de
+# retenção de água (SLDR), índice de fotossíntese (SLPF), e fator de mineralização (SLNF). Este processo visa a simulação precisa de condições
+# de crescimento da forrageira em diferentes ambientes.
+###########################################################################################################################################
+
 # Instalando pacotes
 # Se nao tiver o pacote rcropmod ja instalado, rode as linhas a seguir:
 install.packages("devtools")
