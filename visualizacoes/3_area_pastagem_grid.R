@@ -1,7 +1,11 @@
-############################################################################
+###################################################################################################################################################
 # Área de pastagem e região administrativa predominante por célula do grid
 # 15/03/2024
-############################################################################
+# O script realiza a contagem de pixels e cálculo da área de pastagem utilizando rasters. Ele cria um banco de dados SQLite para armazenar 
+# os resultados intermediários, onde os dados são agrupados e sumarizados para determinar a área de pastagem e a região administrativa 
+# predominante para cada ponto de simulação (grid). A tabela final é exportada para um arquivo CSV (area_pastagem_e_regiao_predominante_grid.csv), contendo informações sobre a área de 
+# pastagem e a região administrativa associada a cada ponto de simulação.
+###################################################################################################################################################
 
 # Limpando area de trabalho
 rm(list=ls())
