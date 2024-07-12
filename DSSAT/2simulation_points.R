@@ -1,3 +1,11 @@
+####################################################################################################################################################
+# O script utiliza processamento paralelo para calcular a área de pastagem em hectares a partir de dados raster e de uma grade geográfica. 
+# Os passos incluem a leitura dos dados, a definição de blocos de processamento, a realização de cálculos em paralelo e o salvamento 
+# dos resultados. O uso de paralelismo permite acelerar o processamento de grandes volumes de dados, tornando o script eficiente para aplicações 
+# dos objetivos deste estudo.
+####################################################################################################################################################
+
+
 # Instalando pacotes
 library(pacman)
 p_load(raster, foreach, parallel, dplyr, sf, doSNOW)
