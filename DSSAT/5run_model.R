@@ -1,16 +1,16 @@
 ##################################################################################################################################################
-# O script analisado é utilizado para a modelagem agrícola com DSSAT, especificamente para simulações de produtividade de pastagens no Brasil.
-# As variáveis de entrada são essenciais para configurar o ambiente de simulação e incluem dados climáticos, parâmetros de solo e detalhes de 
+# O script foi utilizado para a modelagem da cultura (pasto) com DSSAT, especificamente para simulações de produtividade de pastagens no Brasil.
+# As variáveis de entrada foram essenciais para configurar o ambiente de produção da simulação e incluem dados climáticos, parâmetros de solo e detalhes de 
 # simulação. As variáveis climáticas incluem radiação solar diária (SRAD), temperatura máxima (TMAX) e mínima (TMIN) diária, precipitação diária 
 # (RAIN), velocidade do vento (WIND) e umidade relativa diária (RHUM). Os parâmetros de solo abrangem teor de argila e areia em diferentes 
 # profundidades, altitude (SRTM), taxa de drenagem (SLDR), curva de runoff (SLRO), limites de água disponível (SLLL e SDUL), saturação (SSAT),
 # condutividade hidráulica saturada (SSKS), densidade do solo (SBDM), conteúdo de argila (SLCL), silte (SLSI) e pH do solo (SLHW), além da
 # capacidade de troca catiônica (SCEC).
-# O script também inclui parâmetros específicos de simulação como detalhes de plantio, irrigação, controle de simulação e fertilização. Estes parâmetros são definidos
-# para cada ponto de simulação utilizando dados locais e o arquivo X (denominada na tese de Arquivo Setup de CulturaP) do DSSAT é atualizado com estas informações. 
-# A execução do DSSAT é realizada em paralelo para aumentar a eficiência, utilizando as funções de processamento paralelo disponíveis em R
-# As variáveis de saída do modelo são coletadas e incluem várias métricas de crescimento das plantas ao longo do tempo, como a data da observação, 
-# ano, dias após a semeadura (DAS) e indicador de morte da planta (DEATH). Esses resultados são armazenados em um banco de dados SQLite para posterior análise.
+# O script também incluiu parâmetros específicos de simulação como detalhes de plantio, irrigação, controle de simulação e fertilização. Estes parâmetros foram definidos
+# para cada ponto de simulação utilizando dados locais e o arquivo X (denominada na tese de Arquivo Setup de CulturaP) do DSSAT foi atualizado com estas informações. 
+# A execução do DSSAT foi realizada em paralelo para aumentar a eficiência, utilizando as funções de processamento paralelo disponíveis em R
+# As variáveis de saída do modelo foram coletadas e incluem várias métricas de crescimento das plantas ao longo do tempo, como a data da observação, 
+# ano, dias após a semeadura (DAS) e indicador de morte da planta (DEATH). Esses resultados foram armazenados em um banco de dados SQLite para posterior análise.
 ##################################################################################################################################################
 
 #Carregando pacotes
