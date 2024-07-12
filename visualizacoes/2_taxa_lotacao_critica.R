@@ -2,7 +2,7 @@
 # Calculo da taxa de lotacao critica
 # 15/02/2024
 # O script realiza o cálculo da taxa de lotação crítica para diferentes cenários de produtividade de pastagens. Ele se conecta a um banco 
-# de dados SQLite (*outptus_michael.db*), verifica a mortalidade das pastagens antes de 2016 e calcula a taxa de lotação crítica (TL critica) considerando a 
+# de dados SQLite (outptus_michael.db), verifica a mortalidade das pastagens antes de 2016 e calcula a taxa de lotação crítica (TL critica) considerando a 
 # eficiência de pastejo variável em função do período (águas e seca). O cálculo é feito iterativamente até que nenhum ponto de simulação 
 # apresente déficit acima de 2500 kg MS/ha. Os resultados finais são exportados para um arquivo CSV.
 ##########################################################################################################################################
