@@ -1,3 +1,12 @@
+######################################################################################################################################################################
+# os resultados diários da simulação de matéria orgânica no solo utilizando o modelo DSSAT. Cada linha de dados corresponde a um dia específico e 
+# inclui informações sobre o ano da simulação (YEAR), dia do ano (DOY), dias após a semeadura (DAS), matéria orgânica adicionada (OMAC), decomposição 
+# da matéria orgânica superficial (SCDD) e do solo (SOCD), carbono orgânico na superfície (SC0D) e no solo (SOMCT), carbono da serapilheira no solo (LCTD),
+# nitrogênio orgânico adicionado (ONAC), decomposição do nitrogênio orgânico superficial (SNDD) e do solo (SOND), nitrogênio na superfície (SN0D) e no solo (SOMNT), 
+# e nitrogênio na serapilheira do solo (LNTD). Esses dados são essenciais para entender a dinâmica da matéria orgânica e dos nutrientes no solo ao longo do tempo e
+# seu impacto nas condições de crescimento das plantas.
+######################################################################################################################################################################
+
 *Soil Organic Matter daily output file
 
 *DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
