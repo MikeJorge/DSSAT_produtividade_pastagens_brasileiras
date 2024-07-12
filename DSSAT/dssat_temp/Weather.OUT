@@ -1,3 +1,12 @@
+###############################################################################################################################################################################################
+# Este arquivo de saída do módulo meteorológico do DSSAT fornece informações detalhadas sobre as variáveis climáticas diárias durante a execução da simulação para o 
+# experimento SPPI7902BR. As variáveis incluem precipitação (PRED), duração do dia (DAYLD), temperaturas (TWLD, TMXD, TMND, TAVD, TDYD, TDWD, TGAD, TGRD), radiação solar (SRAD), 
+# radiação fotossinteticamente ativa (PARD), graus-dia de resfriamento (CLDD), velocidade do vento (WDSD), concentração de CO2 (CO2D), pressão de vapor (VPDF), défice de pressão 
+# de vapor (VPD), e concentração de ozônio (OZON7). Estes dados são cruciais para entender as condições climáticas que afetam o crescimento das plantas e o desenvolvimento do experimento 
+# simulado.
+###############################################################################################################################################################################################
+
+
 *WEATHER MODULE DAILY OUTPUT FILE
 
 *DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
