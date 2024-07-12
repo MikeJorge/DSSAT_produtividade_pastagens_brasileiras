@@ -6,8 +6,8 @@
 # profundidades, altitude (SRTM), taxa de drenagem (SLDR), curva de runoff (SLRO), limites de água disponível (SLLL e SDUL), saturação (SSAT),
 # condutividade hidráulica saturada (SSKS), densidade do solo (SBDM), conteúdo de argila (SLCL), silte (SLSI) e pH do solo (SLHW), além da
 # capacidade de troca catiônica (SCEC).
-# O script também inclui parâmetros específicos de simulação como detalhes de plantio, irrigação, controle de simulação e fertilização. 
-# Estes parâmetros são definidos para cada ponto de simulação utilizando dados locais e o arquivo X do DSSAT é atualizado com estas informações. 
+# O script também inclui parâmetros específicos de simulação como detalhes de plantio, irrigação, controle de simulação e fertilização. Estes parâmetros são definidos
+# para cada ponto de simulação utilizando dados locais e o arquivo X (denominada na tese de Arquivo Setup de CulturaP) do DSSAT é atualizado com estas informações. 
 # A execução do DSSAT é realizada em paralelo para aumentar a eficiência, utilizando as funções de processamento paralelo disponíveis em R
 # As variáveis de saída do modelo são coletadas e incluem várias métricas de crescimento das plantas ao longo do tempo, como a data da observação, 
 # ano, dias após a semeadura (DAS) e indicador de morte da planta (DEATH). Esses resultados são armazenados em um banco de dados SQLite para posterior análise.
