@@ -1,3 +1,10 @@
+#######################################################################################################################################################################
+# os dados do balanço hídrico para o experimento SPPI7902 BR com o tratamento MARANDU11299. O balanço hídrico é registrado do ano/dia 1980/002 até o ano/dia 2016/365. 
+# Os valores incluem a água no solo no início e no final do período, a irrigação efetiva, a precipitação, a água adicionada com nova cobertura, a drenagem, o fluxo 
+# de drenagem subterrânea, o escoamento superficial, a evaporação da cobertura e do solo, a transpiração, a evapotranspiração potencial, e o conteúdo inicial e final 
+# de água na cobertura. O balanço final de água também é calculado.
+########################################################################################################################################################################
+
 *WATER BALANCE OUTPUT FILE
 
 *DSSAT Cropping System Model Ver. 4.8.0.027 -release  FEB 01, 2024 15:59:10
