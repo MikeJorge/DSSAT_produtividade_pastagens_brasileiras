@@ -1,3 +1,9 @@
+#######################################################################################################################################
+# Este script fornece detalhes dos avisos gerados pelo modelo DSSAT durante a execução da simulação para o experimento SPPI7902BR. 
+# Os avisos incluem informações sobre dados de carbono orgânico ausentes ou zerados em várias camadas do solo, com valores estimados 
+# fornecidos.
+#########################################################################################################################################
+
 *WARNING DETAIL FILE
 
 ******************************************************************************
